@@ -1,15 +1,15 @@
 package com.repro.android;
 
-import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -107,10 +107,7 @@ public class NavigationDrawerFragment extends Fragment {
 		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
 				.getThemedContext(),
 				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, new String[] {
-						getString(R.string.title_section1),
-						getString(R.string.title_section2),
-						getString(R.string.title_section3), }));
+				android.R.id.text1, getResources().getStringArray(R.array.menu_items)));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;
 	}
@@ -147,15 +144,8 @@ public class NavigationDrawerFragment extends Fragment {
 		// between the navigation drawer and the action bar app icon.
 		mDrawerToggle = new ActionBarDrawerToggle(getActivity(), /* host Activity */
 		mDrawerLayout, /* DrawerLayout object */
-		R.drawable.ic_drawer, /* nav drawer image to replace 'Up' caret */
-		R.string.navigation_drawer_open, /*
-										 * "open drawer" description for
-										 * accessibility
-										 */
-		R.string.navigation_drawer_close /*
-										 * "close drawer" description for
-										 * accessibility
-										 */
+		R.string.navigation_drawer_open,
+		R.string.navigation_drawer_close
 		) {
 			@Override
 			public void onDrawerClosed(View drawerView) {
@@ -288,7 +278,7 @@ public class NavigationDrawerFragment extends Fragment {
 	private void showGlobalContextActionBar() {
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		// actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setTitle(R.string.app_name);
 	}
 
