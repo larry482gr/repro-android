@@ -7,14 +7,33 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
     
-    
-    <string name="research_team">Research Team</string>
-    <string name="research_program">Research Program</string>
-    <string name="news">News</string>
-    <string name="events">Events</string>
-    <string name="links">Links</string>
-    <string name="information">Information</string>
-    <string name="opinion">Your Opinion</string>
-    <string name="contact">Contact Us</string>
+    <!-- Menu Strings -->
+	    <string name="research_team">Research Team</string>
+	    <string name="research_program">Research Program</string>
+	    <string name="news">News</string>
+	    <string name="events">Events</string>
+	    <string name="links">Links</string>
+	    <string name="information">Information</string>
+	    <string name="opinion">Your Opinion</string>
+	    <string name="contact">Contact Us</string>
+	<!-- Menu Strings -->
+	
+	<string name="domain_url">http://repro.law.auth.gr/api/</string>
+	<!-- URL Script Strings -->
+		<string name="news_script">news.php?</string>
+	<!-- URL Script Strings -->
+		
+	<!-- URL Params Strings -->
+		<string name="param_separator">&amp;</string>
+		<string name="param_operator">=</string>
+		<string name="param_action">action</string>
+		<string name="param_id">id</string>
+	<!-- URL Params Strings -->
 
+	<!-- URL Action Strings -->
+		<string name="find_all">all</string>
+		<string name="find_one">one</string>
+	<!-- URL Action Strings -->
+	
+	
 </resources>
