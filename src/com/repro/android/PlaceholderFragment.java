@@ -1,14 +1,17 @@
 package com.repro.android;
 
-import com.repro.android.asynctasks.NewsAsyncTask;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.repro.android.adapters.NewsAdapter;
+import com.repro.android.entities.Article;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -55,7 +58,7 @@ public class PlaceholderFragment extends Fragment {
 		int fragmentId = -1;
 		switch(tabId) {
 			case 3:
-				fragmentId = R.layout.fragment_news;
+				fragmentId = R.layout.fragment_news_list;
 				break;
 			default:
 				fragmentId = R.layout.fragment_main;
@@ -83,8 +86,9 @@ public class PlaceholderFragment extends Fragment {
 	}
 
 	private void initNewsFragment(View rootView) {
-		NewsAsyncTask news = new NewsAsyncTask(this.getActivity(), rootView);
-		news.execute(new String[] { "all" });
+		ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
+		NewsAdapter mAdapter = new NewsAdapter(this.getActivity(), R.layout.article_item, MainActivity.articles);
+		newsList.setAdapter(mAdapter);
 	}
 
 	@Override

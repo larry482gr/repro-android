@@ -27,17 +27,18 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.repro.android.R;
+import com.repro.android.entities.Article;
 
 public class NewsAsyncTask extends HTTPAsyncTask {
 	private String TAG = "NewsAsyncTask";
 	private String id_param;
-	private RelativeLayout newsView;
+	private ArrayList<Article> articles;
 	private ProgressDialog dialog;
 	
-    public NewsAsyncTask(Context context, View rootView) {
+    public NewsAsyncTask(Context context, ArrayList<Article> articles) {
     	super(context);
-    	this.newsView = (RelativeLayout) rootView;
     	this.dialog = new ProgressDialog(context);
+    	this.articles = articles;
 	}
     
     @Override
@@ -61,8 +62,13 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 		try {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("action", action));
-			if(null != id_param)
+			if(null != id_param) {
 				nameValuePairs.add(new BasicNameValuePair("id", id_param));
+			}
+			else {
+				// TODO Refactor this to actually send user's preferred language.
+				nameValuePairs.add(new BasicNameValuePair("langId", "2"));
+			}
 			
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -97,26 +103,29 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 	
 	@Override
 	protected void onPostExecute(JSONArray json_response) {
-		Log.i(TAG, "Response JSON Objects: " + json_response.length());
-		populateNewsList(json_response);
+		try {
+			Log.i(TAG, "Response JSON Objects: " + json_response.length());
+			createArticles(json_response);
+		} catch(NullPointerException e) {
+			Log.d(TAG, e.getLocalizedMessage());
+		}
 	}
 
-	private void populateNewsList(JSONArray json_response) {
-		ListView newsList = (ListView) newsView.findViewById(R.id.news_list);
-		List<String> articlesTitles = new ArrayList<String>();
+	private void createArticles(JSONArray json_response) {
+		// ListView newsList = (ListView) newsView.findViewById(R.id.news_list);
 		for (int i = 0; i < json_response.length(); i++) {
 			try {
-				articlesTitles.add(json_response.getJSONObject(i).getString("title"));
+				Article article = new Article(json_response.getJSONObject(i));
+				articles.add(article);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Log.d(TAG, e.getLocalizedMessage());
 			}
 		}
 		if (dialog.isShowing()) {
             dialog.dismiss();
         }
-		ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, articlesTitles);
-		newsList.setAdapter(mAdapter);
+		// ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, articlesTitles);
+		// newsList.setAdapter(mAdapter);
 
 	}
 }

@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDDD"
+    android:background="#EE3B3B48"
     android:choiceMode="singleChoice"
-    android:divider="#9999"
+    android:divider="#CCCC"
     android:dividerHeight="1dp"
     tools:context="com.repro.android.NavigationDrawerFragment" />

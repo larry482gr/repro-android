@@ -1,5 +1,10 @@
 package com.repro.android;
 
+import java.util.ArrayList;
+
+import com.repro.android.asynctasks.NewsAsyncTask;
+import com.repro.android.entities.Article;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -8,8 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends Activity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -22,6 +26,8 @@ public class MainActivity extends Activity implements
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
+	
+	public static ArrayList<Article> articles;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,20 @@ public class MainActivity extends Activity implements
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if(null == articles) {
+			articles = new ArrayList<Article>();
+			preloadArticles(articles);
+		}
+	}
+	
+	private void preloadArticles(ArrayList<Article> articles) {
+		NewsAsyncTask news = new NewsAsyncTask(this, articles);
+		news.execute(new String[] { "all" });
 	}
 
 	@Override
