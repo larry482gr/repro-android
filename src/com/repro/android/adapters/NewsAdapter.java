@@ -91,7 +91,7 @@ public class NewsAdapter extends ArrayAdapter<Article> {
 		Log.i(TAG, "Article image: " + imageUri);
 		
 		holder.articleTitle.setText(article.getTitle());
-		holder.articleShortDesc.setText(HTTPUtilities.stripHtml(article.getLongDesc()));
+		holder.articleShortDesc.setText(HTTPUtilities.stripHtml(article.getShortDesc()));
 		ImageLoader.getInstance().displayImage(imageUri, holder.articleImage, options, animateFirstListener);
 		return view;
 	}

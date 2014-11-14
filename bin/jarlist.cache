@@ -1,0 +1,7 @@
+# cache for current jar dependency. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1415700384000 987314 9b6a9a9078af571732159b904ad423b03b7cc786 /Users/lkazantzis/Documents/workspace/ReproAndroid/libs/android-support-v4.jar
+1415703874000 987314 9b6a9a9078af571732159b904ad423b03b7cc786 /Users/lkazantzis/Documents/workspace/appcompat_v7/libs/android-support-v4.jar
+1415703874000 520038 4a3c67dee4051a6bb47c877c6115ba4b1a246afb /Users/lkazantzis/Documents/workspace/appcompat_v7/libs/android-support-v7-appcompat.jar
+1415702872000 520038 4a3c67dee4051a6bb47c877c6115ba4b1a246afb /Users/lkazantzis/Documents/workspace/ReproAndroid/libs/android-support-v7-appcompat.jar
