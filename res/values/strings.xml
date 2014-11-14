@@ -18,6 +18,17 @@
 	    <string name="contact">Contact Us</string>
 	<!-- Menu Strings -->
 	
+	<!-- Dialogs Strings -->
+		<string name="no_connection_msg">Please make sure you have an active internet connection in order to receive the latest content.</string>
+	    <string name="news_no_connection_msg">Please enable Wi-Fi or mobile data in order to receive the latest news</string>
+	    <string name="enable_wifi">Enable Wi-Fi</string>
+	    <string name="enable_mobile">Enable Mobile Data</string>
+	    <string name="enabling_wifi">Enabling Wi-Fi...</string>
+	    <string name="enabling_mobile">Enabling Mobile Data...</string>
+		<string name="accept">Ok</string>
+	    <string name="cancel">Cancel</string>
+	<!-- Dialogs Strings -->
+	
 	<string name="domain_url">http://repro.law.auth.gr/api/</string>
 	<!-- URL Script Strings -->
 		<string name="news_script">news.php?</string>
@@ -35,5 +46,8 @@
 		<string name="find_one">one</string>
 	<!-- URL Action Strings -->
 	
+	<!-- URL Image Strings -->
+		<string name="news_images">http://repro.law.auth.gr/resources/images/news/</string>
+	<!-- URL Image Strings -->
 	
 </resources>

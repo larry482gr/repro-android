@@ -2,8 +2,14 @@ package com.repro.android;
 
 import java.util.ArrayList;
 
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.repro.android.asynctasks.NewsAsyncTask;
+import com.repro.android.dialogs.Dialogs;
 import com.repro.android.entities.Article;
+import com.repro.android.utilities.NetworkUtilities;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -46,9 +52,13 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(null == articles) {
+		if(null == articles && NetworkUtilities.isConnectedToInternet(this)) {
 			articles = new ArrayList<Article>();
 			preloadArticles(articles);
+		}
+		else {
+			String title = getResources().getString(R.string.no_connection_msg);
+			// Dialogs.confirmDialog(this, title, message, positive_text, positive_listener, negative_text, negative_listener)
 		}
 	}
 	

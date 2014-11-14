@@ -1646,7 +1646,10 @@ containing a value of this type.
         public static final int abc_textfield_search_material=0x7f020032;
         public static final int drawer_shadow=0x7f020033;
         public static final int ic_drawer=0x7f020034;
-        public static final int ic_launcher=0x7f020035;
+        public static final int ic_empty=0x7f020035;
+        public static final int ic_error=0x7f020036;
+        public static final int ic_launcher=0x7f020037;
+        public static final int ic_stub=0x7f020038;
     }
     public static final class id {
         public static final int action_bar=0x7f090033;
@@ -1841,35 +1844,50 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000d;
+        public static final int accept=0x7f0a0022;
         public static final int action_example=0x7f0a0012;
         public static final int action_settings=0x7f0a0013;
         public static final int app_name=0x7f0a000f;
+        public static final int cancel=0x7f0a0023;
         public static final int contact=0x7f0a001b;
-        /**  Menu Strings 
+        /**  Dialogs Strings 
          */
-        public static final int domain_url=0x7f0a001c;
+        public static final int domain_url=0x7f0a0024;
+        public static final int enable_mobile=0x7f0a001f;
+        public static final int enable_wifi=0x7f0a001e;
+        public static final int enabling_mobile=0x7f0a0021;
+        public static final int enabling_wifi=0x7f0a0020;
         public static final int events=0x7f0a0017;
         /**  URL Params Strings 
  URL Action Strings 
          */
-        public static final int find_all=0x7f0a0022;
-        public static final int find_one=0x7f0a0023;
+        public static final int find_all=0x7f0a002a;
+        public static final int find_one=0x7f0a002b;
         public static final int information=0x7f0a0019;
         public static final int links=0x7f0a0018;
         public static final int navigation_drawer_close=0x7f0a0011;
         public static final int navigation_drawer_open=0x7f0a0010;
         public static final int news=0x7f0a0016;
+        /**  URL Action Strings 
+ URL Image Strings 
+         */
+        public static final int news_images=0x7f0a002c;
+        public static final int news_no_connection_msg=0x7f0a001d;
         /**  URL Script Strings 
          */
-        public static final int news_script=0x7f0a001d;
+        public static final int news_script=0x7f0a0025;
+        /**  Menu Strings 
+ Dialogs Strings 
+         */
+        public static final int no_connection_msg=0x7f0a001c;
         public static final int opinion=0x7f0a001a;
-        public static final int param_action=0x7f0a0020;
-        public static final int param_id=0x7f0a0021;
-        public static final int param_operator=0x7f0a001f;
+        public static final int param_action=0x7f0a0028;
+        public static final int param_id=0x7f0a0029;
+        public static final int param_operator=0x7f0a0027;
         /**  URL Script Strings 
  URL Params Strings 
          */
-        public static final int param_separator=0x7f0a001e;
+        public static final int param_separator=0x7f0a0026;
         public static final int research_program=0x7f0a0015;
         /**  Menu Strings 
          */

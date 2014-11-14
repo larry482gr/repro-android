@@ -1,4 +1,4 @@
-package com.repro.android.utilities.http;
+package com.repro.android.utilities;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +13,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.protocol.HTTP;
 
 import android.net.ParseException;
+import android.text.Html;
 
 public class HTTPUtilities {
 	/**
@@ -90,5 +91,9 @@ public class HTTPUtilities {
 		}
 
 		return charset;
+	}
+	
+	public static String stripHtml(String html) {
+	    return Html.fromHtml(html).toString();
 	}
 }

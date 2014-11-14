@@ -30,6 +30,17 @@ public class Article {
 			this.picture = jsonObject.getString("picture");
 			this.langId = jsonObject.getInt("lang_id");
 			this.publishedAt = jsonObject.getString("published_at");
+			
+			Log.d(TAG, "Article id: " + jsonObject.getLong("id"));
+			Log.d(TAG, "Article title: " + jsonObject.getString("title"));
+			Log.d(TAG, "Article short_desc: " + jsonObject.getString("short_desc"));
+			Log.d(TAG, "Article long_desc: " + jsonObject.getString("long_desc"));
+			Log.d(TAG, "Article source_label: " + jsonObject.getString("source_label"));
+			Log.d(TAG, "Article source_link: " + jsonObject.getString("source_link"));
+			Log.d(TAG, "Article picture: " + jsonObject.getString("picture"));
+			Log.d(TAG, "Article lang_id: " + jsonObject.getInt("lang_id"));
+			Log.d(TAG, "Article published_at: " + jsonObject.getString("published_at"));
+			
 		} catch (JSONException e) {
 			Log.d(TAG, e.getLocalizedMessage());
 		}

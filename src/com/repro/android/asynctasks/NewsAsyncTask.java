@@ -21,10 +21,6 @@ import org.json.JSONException;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.repro.android.R;
 import com.repro.android.entities.Article;
@@ -33,18 +29,18 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 	private String TAG = "NewsAsyncTask";
 	private String id_param;
 	private ArrayList<Article> articles;
-	private ProgressDialog dialog;
+	// private ProgressDialog dialog;
 	
     public NewsAsyncTask(Context context, ArrayList<Article> articles) {
     	super(context);
-    	this.dialog = new ProgressDialog(context);
+    	// this.dialog = new ProgressDialog(context);
     	this.articles = articles;
 	}
     
     @Override
     protected void onPreExecute() {
-        this.dialog.setMessage("Loading...");
-        this.dialog.show();
+        // this.dialog.setMessage("Loading...");
+        // this.dialog.show();
     }
 
 	@Override
@@ -121,11 +117,10 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 				Log.d(TAG, e.getLocalizedMessage());
 			}
 		}
+		/*
 		if (dialog.isShowing()) {
             dialog.dismiss();
         }
-		// ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, articlesTitles);
-		// newsList.setAdapter(mAdapter);
-
+        */
 	}
 }
