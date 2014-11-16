@@ -2,15 +2,23 @@
 <resources>
     
     <!-- Menu Items -->
-    <string-array name="menu_items">
-        <item>@string/research_team</item>
-        <item>@string/research_program</item>
-        <item>@string/news</item>
-        <item>@string/events</item>
-        <item>@string/links</item>
-        <item>@string/information</item>
-        <item>@string/opinion</item> <!-- Dummy entry to get 'other' to index 7. -->
-        <item>@string/contact</item>
-    </string-array>
+	    <string-array name="menu_items">
+	        <item>@string/research_team</item>
+	        <item>@string/research_program</item>
+	        <item>@string/news</item>
+	        <item>@string/events</item>
+	        <item>@string/links</item>
+	        <item>@string/information</item>
+	        <item>@string/opinion</item>
+	        <item>@string/contact</item>
+	    </string-array>
+    <!-- Menu Items -->
+    
+    <!-- Language Items -->
+    	<string-array name="language_items">
+    	    <item>@string/lang_english</item>
+    	    <item>@string/lang_greek</item>
+    	</string-array>
+    <!-- Language Items -->
     
 </resources>

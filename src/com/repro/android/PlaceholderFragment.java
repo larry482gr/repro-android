@@ -1,15 +1,23 @@
 package com.repro.android;
 
+import java.util.Locale;
+
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.repro.android.adapters.NewsAdapter;
+import com.repro.android.entities.StaticContent;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -55,6 +63,9 @@ public class PlaceholderFragment extends Fragment {
 	private int getFragment(int tabId) {
 		int fragmentId = -1;
 		switch(tabId) {
+			case 2:
+				fragmentId = R.layout.fragment_research_program;
+				break;
 			case 3:
 				fragmentId = R.layout.fragment_news_list;
 				break;
@@ -68,6 +79,9 @@ public class PlaceholderFragment extends Fragment {
 	
 	private void initView(View rootView, int tabId) {
 		switch(tabId) {
+			case 2:
+				initResearchProgramFragment(rootView);
+				break;
 			case 3:
 				initNewsFragment(rootView);
 				break;
@@ -77,16 +91,40 @@ public class PlaceholderFragment extends Fragment {
 		}
 	}
 
+	private void initResearchProgramFragment(View rootView) {
+		Configuration config = rootView.getContext().getResources().getConfiguration();
+        Locale locale = config.locale;
+        
+		WebView researchProgram = (WebView) rootView.findViewById(R.id.research_program);
+		if(locale.toString().equals("el_GR")) {
+			researchProgram.loadDataWithBaseURL(null, StaticContent.RESEARCH_PROGRAM_TITLE_GR+StaticContent.RESEARCH_PROGRAM_CONTENT_GR, 
+								 "text/html","utf-8", null);
+		}
+		else {
+			researchProgram.loadDataWithBaseURL(null, StaticContent.RESEARCH_PROGRAM_TITLE_EN+StaticContent.RESEARCH_PROGRAM_CONTENT_EN, 
+					 "text/html","utf-8", null);
+		}
+		
+        // Toast.makeText(getActivity(), locale.toString(), Toast.LENGTH_LONG).show();
+		
+	}
+	
+	private void initNewsFragment(final View rootView) {
+		Handler mHandler = new Handler(Looper.getMainLooper());
+		
+		mHandler.postDelayed(new Runnable(){
+			public void run() {
+				ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
+				NewsAdapter mAdapter = new NewsAdapter(getActivity(), R.layout.article_item, MainActivity.articles);
+				newsList.setAdapter(mAdapter);
+		    }
+		}, 500);
+	}
+
 	private void initMainFragment(View rootView, int tabId) {
 		TextView fragment_text = (TextView) rootView.findViewById(R.id.section_label);
 		String[] menuItems = getResources().getStringArray(R.array.menu_items);
 		fragment_text.setText(menuItems[tabId-1]);
-	}
-
-	private void initNewsFragment(View rootView) {
-		ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
-		NewsAdapter mAdapter = new NewsAdapter(this.getActivity(), R.layout.article_item, MainActivity.articles);
-		newsList.setAdapter(mAdapter);
 	}
 
 	@Override

@@ -3,9 +3,9 @@
     tools:context="com.repro.android.MainActivity" >
 
     <item
-        android:id="@+id/action_example"
+        android:id="@+id/action_language"
         android:showAsAction="withText|ifRoom"
-        android:title="@string/action_example"/>
+        android:title="@string/action_language"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

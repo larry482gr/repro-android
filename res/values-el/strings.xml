@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ReproAndroid</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
-    <string name="action_language">Language</string>
+    <string name="action_language">Γλωσσα</string>
     <string name="action_settings">Settings</string>
     
     <!-- Language Strings -->
-    	<string name="lang_select">Select Language</string>
-	    <string name="lang_english">English</string>
-	    <string name="lang_greek">Greek</string>
+    	<string name="lang_select">Επιλογή Γλώσσας</string>
+	    <string name="lang_english">Αγγλικά</string>
+	    <string name="lang_greek">Ελληνικά</string>
 	<!-- Language Strings -->
     
     <!-- Menu Strings -->
-	    <string name="research_team">Research Team</string>
-	    <string name="research_program">Research Program</string>
-	    <string name="news">News</string>
-	    <string name="events">Events</string>
-	    <string name="links">Links</string>
-	    <string name="information">Information</string>
-	    <string name="opinion">Your Opinion</string>
-	    <string name="contact">Contact Us</string>
+	    <string name="research_team">Επιστημονική Ομάδα</string>
+	    <string name="research_program">Ερευνητικό Πρόγραμμα</string>
+	    <string name="news">Νέα</string>
+	    <string name="events">Εκδηλώσεις</string>
+	    <string name="links">Σύνδεσμοι</string>
+	    <string name="information">Ενημερώσεις</string>
+	    <string name="opinion">Η Γνώμη σας</string>
+	    <string name="contact">Επικοινωνία</string>
 	<!-- Menu Strings -->
 	
 	<!-- Dialogs Strings -->

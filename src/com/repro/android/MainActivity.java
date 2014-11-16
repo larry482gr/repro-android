@@ -1,23 +1,28 @@
 package com.repro.android;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog.Builder;
+import android.app.FragmentManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+
 import com.repro.android.asynctasks.NewsAsyncTask;
 import com.repro.android.dialogs.Dialogs;
 import com.repro.android.entities.Article;
 import com.repro.android.utilities.NetworkUtilities;
-
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -32,6 +37,8 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	 * {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
+
+	private Context mContext;
 	
 	public static ArrayList<Article> articles;
 
@@ -47,24 +54,49 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		
+		mContext = this;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(null == articles && NetworkUtilities.isConnectedToInternet(this)) {
+		if(null == articles) {
 			articles = new ArrayList<Article>();
 			preloadArticles(articles);
 		}
-		else {
-			String title = getResources().getString(R.string.no_connection_msg);
-			// Dialogs.confirmDialog(this, title, message, positive_text, positive_listener, negative_text, negative_listener)
-		}
 	}
 	
-	private void preloadArticles(ArrayList<Article> articles) {
-		NewsAsyncTask news = new NewsAsyncTask(this, articles);
-		news.execute(new String[] { "all" });
+	private void preloadArticles(final ArrayList<Article> articles) {
+		if(NetworkUtilities.isConnectedToInternet(this)) {
+			NewsAsyncTask news = new NewsAsyncTask(this, articles);
+			news.execute(new String[] { "all" });
+		}
+		else {
+			String title = getResources().getString(R.string.no_connection_msg);
+			String[] options = new String[] { getResources().getString(R.string.enable_wifi), getResources().getString(R.string.enable_mobile) };
+			OnClickListener connect = new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(which == 0) {
+						NetworkUtilities.enableWifi(mContext);
+					}
+					else if(which == 1) {
+						NetworkUtilities.enableMobileData(mContext);
+					}
+					
+					Handler mHandler = new Handler(Looper.getMainLooper());
+					
+					mHandler.postDelayed(new Runnable(){
+						public void run() {
+							preloadArticles(articles);
+					    }
+					}, 5000);
+				}
+			};
+			Builder alertDialog = Dialogs.optionDialog(mContext, title, options, connect);
+			alertDialog.create().show();
+		}
 	}
 
 	@Override
@@ -111,6 +143,35 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		if (id == R.id.action_settings) {
 			return true;
 		}
+		else if(id == R.id.action_language) {
+			showLanguageAlert();
+		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void showLanguageAlert() {
+		String title = getResources().getString(R.string.lang_select);
+		String[] options = getResources().getStringArray(R.array.language_items);
+		OnClickListener connect = new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Configuration config = getBaseContext().getResources().getConfiguration();
+				Locale locale = null;
+				if(which == 0) {
+					locale = Locale.ENGLISH;
+				}
+				else if(which == 1) {
+					locale = Locale.getDefault();
+				}
+				
+				config.locale = locale;
+				getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+				
+				recreate();
+			}
+		};
+		Builder alertDialog = Dialogs.optionDialog(mContext, title, options, connect);
+		alertDialog.create().show();
+		
 	}
 }

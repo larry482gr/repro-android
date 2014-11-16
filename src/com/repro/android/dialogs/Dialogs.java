@@ -11,18 +11,18 @@ public class Dialogs {
 			OnClickListener positive_listener, String negative_text,
 			OnClickListener negative_listener) {
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder confirmDialog = new AlertDialog.Builder(context);
 
 		if (title != null)
-			builder.setTitle(title);
+			confirmDialog.setTitle(title);
 		if (message != null)
-			builder.setMessage(message);
+			confirmDialog.setMessage(message);
 		if (positive_text != null)
-			builder.setPositiveButton(positive_text, positive_listener);
+			confirmDialog.setPositiveButton(positive_text, positive_listener);
 		if (negative_text != null)
-			builder.setNegativeButton(negative_text, negative_listener);
+			confirmDialog.setNegativeButton(negative_text, negative_listener);
 
-		return builder;
+		return confirmDialog;
 	}
 	
 	public static Builder optionDialog(Context context, String title, String[] options, OnClickListener onClickListener) {
