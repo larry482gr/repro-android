@@ -9,11 +9,13 @@ import android.app.AlertDialog.Builder;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +24,7 @@ import android.widget.ArrayAdapter;
 import com.repro.android.asynctasks.NewsAsyncTask;
 import com.repro.android.dialogs.Dialogs;
 import com.repro.android.entities.Article;
+import com.repro.android.utilities.Constants;
 import com.repro.android.utilities.NetworkUtilities;
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -157,15 +160,21 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			public void onClick(DialogInterface dialog, int which) {
 				Configuration config = getBaseContext().getResources().getConfiguration();
 				Locale locale = null;
+				String langId = null;
+				
 				if(which == 0) {
 					locale = Locale.ENGLISH;
+					langId = Constants.ENGLISH_ID;
 				}
 				else if(which == 1) {
 					locale = Locale.getDefault();
+					langId = Constants.GREEK_ID;
 				}
 				
 				config.locale = locale;
 				getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+				ReproAndroid.prefs.edit().putString(Constants.LOCALE, locale.toString()).commit();
+				ReproAndroid.prefs.edit().putString(Constants.LANGUAGE_ID, langId).commit();
 				
 				recreate();
 			}

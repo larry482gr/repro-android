@@ -118,7 +118,7 @@ public class PlaceholderFragment extends Fragment {
 				NewsAdapter mAdapter = new NewsAdapter(getActivity(), R.layout.article_item, MainActivity.articles);
 				newsList.setAdapter(mAdapter);
 		    }
-		}, 500);
+		}, 400);
 	}
 
 	private void initMainFragment(View rootView, int tabId) {

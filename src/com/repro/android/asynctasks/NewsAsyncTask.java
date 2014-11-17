@@ -22,8 +22,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
+import com.repro.android.MainActivity;
 import com.repro.android.R;
+import com.repro.android.ReproAndroid;
 import com.repro.android.entities.Article;
+import com.repro.android.utilities.Constants;
 
 public class NewsAsyncTask extends HTTPAsyncTask {
 	private String TAG = "NewsAsyncTask";
@@ -62,8 +65,8 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 				nameValuePairs.add(new BasicNameValuePair("id", id_param));
 			}
 			else {
-				// TODO Refactor this to actually send user's preferred language.
-				nameValuePairs.add(new BasicNameValuePair("langId", "2"));
+				String langId = ReproAndroid.prefs.getString(Constants.LANGUAGE_ID, Constants.ENGLISH_ID);
+				nameValuePairs.add(new BasicNameValuePair("langId", langId));
 			}
 			
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
