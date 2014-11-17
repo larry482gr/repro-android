@@ -57,7 +57,10 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	@Override
 	public void onResume() {
 		super.onResume();
-		preloadArticles();
+		if(ReproAndroid.prefs.getBoolean(Constants.JUST_LAUNCHED, true)) {
+			preloadArticles();
+			ReproAndroid.prefs.edit().putBoolean(Constants.JUST_LAUNCHED, false).commit();
+		}
 	}
 	
 	private void preloadArticles() {

@@ -19,7 +19,6 @@
         android:scaleType="center"
         android:src="@drawable/ic_launcher" />
     
-    
     <HorizontalScrollView
         android:id="@+id/article_title_view"
         android:layout_width="match_parent"

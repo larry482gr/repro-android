@@ -10,10 +10,12 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -64,6 +66,7 @@ public class NewsAdapter extends CursorAdapter {
 		holder.articleShortDesc = (TextView) view.findViewById(R.id.article_short_desc);
 		
 		view.setTag(holder);
+		
 		return view;
 	}
 
@@ -71,6 +74,7 @@ public class NewsAdapter extends CursorAdapter {
 	public void bindView(View view, Context context, Cursor cursor) {
 		ViewHolder holder = (ViewHolder) view.getTag();
 		
+		final long articleId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants._ID));
 		String image = cursor.getString(cursor.getColumnIndex(DatabaseConstants.PICTURE));
 		String imageUri = mContext.getResources().getString(R.string.news_images) + image;
 		Log.i(TAG, "Article title: " + cursor.getString(cursor.getColumnIndex(DatabaseConstants.TITLE)));
@@ -79,12 +83,22 @@ public class NewsAdapter extends CursorAdapter {
 		holder.articleTitle.setText(cursor.getString(cursor.getColumnIndex(DatabaseConstants.TITLE)));
 		holder.articleShortDesc.setText(HTTPUtilities.stripHtml(cursor.getString(cursor.getColumnIndex(DatabaseConstants.SHORT_DESC))));
 		ImageLoader.getInstance().displayImage(imageUri, holder.articleImage, options, animateFirstListener);
+		
+		holder.articleClick = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(mContext, Long.toString(articleId), Toast.LENGTH_SHORT).show();
+			}
+		};
+		
+		view.setOnClickListener(holder.articleClick);
 	}
 	
 	private static class ViewHolder {
 		ImageView articleImage;
 		TextView articleTitle;
 		TextView articleShortDesc;
+		OnClickListener articleClick;
 	}
 	
 	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {

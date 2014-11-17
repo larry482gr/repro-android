@@ -36,6 +36,8 @@ public class ReproAndroid extends Application {
 		}
 		config.locale = locale;
 		getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+		
+		prefs.edit().putBoolean(Constants.JUST_LAUNCHED, true).commit();
 	}
 	
 	public static void initImageLoader(Context context) {
