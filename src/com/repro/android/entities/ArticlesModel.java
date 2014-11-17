@@ -45,6 +45,14 @@ public class ArticlesModel {
 		return cursor;
 	}
 	
+	public Cursor findArticle(int articleId) {
+		String selection = DatabaseConstants._ID + " = ?";
+		String[] selectionArgs = new String[] { Integer.toString(articleId) };
+		Cursor cursor = db.query(DatabaseConstants.TABLE_NEWS, null, selection, selectionArgs, null, null, null);
+		
+		return cursor;
+	}
+	
 	public long createArticle(JSONObject article) {
 		// SQLiteDatabase db = dbHandler.getDb();
 		ContentValues values = new ContentValues();

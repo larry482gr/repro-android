@@ -22,7 +22,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.repro.android.R;
-import com.repro.android.entities.Article;
 import com.repro.android.entities.ArticlesModel;
 
 public class NewsAsyncTask extends HTTPAsyncTask {

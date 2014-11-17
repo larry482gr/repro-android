@@ -100,9 +100,10 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager
-				.beginTransaction()
-				.replace(R.id.container,
-						PlaceholderFragment.newInstance(position + 1)).commit();
+			.beginTransaction()
+			.replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+			.addToBackStack(null)
+			.commit();
 	}
 
 	public void onSectionAttached(int number) {
