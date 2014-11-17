@@ -5,6 +5,7 @@ import java.util.Locale;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,11 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.repro.android.adapters.NewsAdapter;
+import com.repro.android.entities.ArticlesModel;
 import com.repro.android.entities.StaticContent;
 
 /**
@@ -57,6 +59,11 @@ public class PlaceholderFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
 		initView(getView(), tabId);
 	}
 
@@ -115,7 +122,9 @@ public class PlaceholderFragment extends Fragment {
 		mHandler.postDelayed(new Runnable(){
 			public void run() {
 				ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
-				NewsAdapter mAdapter = new NewsAdapter(getActivity(), R.layout.article_item, MainActivity.articles);
+				ArticlesModel articlesModel = new ArticlesModel(getActivity());
+				Cursor articlesCursor = articlesModel.findArticles();
+				NewsAdapter mAdapter = new NewsAdapter(getActivity(), articlesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 				newsList.setAdapter(mAdapter);
 		    }
 		}, 400);

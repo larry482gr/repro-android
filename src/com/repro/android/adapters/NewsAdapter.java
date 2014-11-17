@@ -1,17 +1,17 @@
 package com.repro.android.adapters;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,23 +22,22 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.repro.android.R;
-import com.repro.android.entities.Article;
+import com.repro.android.database.DatabaseConstants;
 import com.repro.android.utilities.HTTPUtilities;
 
-public class NewsAdapter extends ArrayAdapter<Article> {
+public class NewsAdapter extends CursorAdapter {
 	private static final String TAG = "NewsAdapter";
 	private Context mContext;
-	private ArrayList<Article> articles;
 	private LayoutInflater inflater;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
+	// private Cursor articlesCursor;
 
-	public NewsAdapter(Context context, int resource, ArrayList<Article> articles) {
-		super(context, resource, articles);
+	public NewsAdapter(Context context, Cursor articlesCursor, int flags) {
+		super(context, articlesCursor, flags);
 		this.mContext = context;
-		this.articles = articles;
 		this.inflater = LayoutInflater.from(context);
-		Log.d(TAG, "Total Articles: " + articles.size());
+		Log.d(TAG, "Total Articles: " + articlesCursor.getCount());
 		
 		// Image loader options
 		options = new DisplayImageOptions.Builder()
@@ -52,48 +51,34 @@ public class NewsAdapter extends ArrayAdapter<Article> {
 			.bitmapConfig(Bitmap.Config.ARGB_8888)
 			.build();
 	}
-	
-	@Override
-	public int getCount() {
-		return articles.size();
-	}
 
 	@Override
-	public Article getItem(int arg0) {
-		return articles.get(arg0);
-	}
-
-	@Override
-	public long getItemId(int arg0) {
-		return arg0;
-	}
-	
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = convertView;
-		final ViewHolder holder;
-		if (convertView == null) {
-			view = inflater.inflate(R.layout.article_item, parent, false);
-			holder = new ViewHolder();
-			holder.articleImage = (ImageView) view.findViewById(R.id.article_image);
-			holder.articleTitle = (TextView) view.findViewById(R.id.article_title);
-			holder.articleShortDesc = (TextView) view.findViewById(R.id.article_short_desc);
-			view.setTag(holder);
-		}
-		else {
-			holder = (ViewHolder) view.getTag();
-		}
+	public View newView(Context context, Cursor cursor, ViewGroup parent) {
+		ViewHolder holder = new ViewHolder();
+		View view = null;
 		
-		Article article = getItem(position);
-		String image = article.getPicture();
-		String imageUri = mContext.getResources().getString(R.string.news_images) + image;
-		Log.i(TAG, "Article title: " + article.getTitle());
-		Log.i(TAG, "Article image: " + imageUri);
+		view = inflater.inflate(R.layout.article_item, parent, false);
+		holder = new ViewHolder();
+		holder.articleImage = (ImageView) view.findViewById(R.id.article_image);
+		holder.articleTitle = (TextView) view.findViewById(R.id.article_title);
+		holder.articleShortDesc = (TextView) view.findViewById(R.id.article_short_desc);
 		
-		holder.articleTitle.setText(article.getTitle());
-		holder.articleShortDesc.setText(HTTPUtilities.stripHtml(article.getShortDesc()));
-		ImageLoader.getInstance().displayImage(imageUri, holder.articleImage, options, animateFirstListener);
+		view.setTag(holder);
 		return view;
+	}
+
+	@Override
+	public void bindView(View view, Context context, Cursor cursor) {
+		ViewHolder holder = (ViewHolder) view.getTag();
+		
+		String image = cursor.getString(cursor.getColumnIndex(DatabaseConstants.PICTURE));
+		String imageUri = mContext.getResources().getString(R.string.news_images) + image;
+		Log.i(TAG, "Article title: " + cursor.getString(cursor.getColumnIndex(DatabaseConstants.TITLE)));
+		Log.i(TAG, "Article image: " + imageUri);
+				
+		holder.articleTitle.setText(cursor.getString(cursor.getColumnIndex(DatabaseConstants.TITLE)));
+		holder.articleShortDesc.setText(HTTPUtilities.stripHtml(cursor.getString(cursor.getColumnIndex(DatabaseConstants.SHORT_DESC))));
+		ImageLoader.getInstance().displayImage(imageUri, holder.articleImage, options, animateFirstListener);
 	}
 	
 	private static class ViewHolder {
