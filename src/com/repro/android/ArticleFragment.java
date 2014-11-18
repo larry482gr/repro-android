@@ -8,6 +8,8 @@ import android.app.Fragment;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +24,15 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.repro.android.database.DatabaseConstants;
 import com.repro.android.entities.ArticlesModel;
+import com.repro.android.utilities.HtmlTagHandler;
 
 public class ArticleFragment extends Fragment {
+	private final String TAG = "ArticleFragment";
 	private static final String ARTICLE_ID = "article_id";
 	private ArticlesModel articlesModel;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
+	private HtmlTagHandler htmlTagHandler = new HtmlTagHandler();
 	
 	public static ArticleFragment newInstance(int articleId) {
 		ArticleFragment fragment = new ArticleFragment();
@@ -72,8 +77,8 @@ public class ArticleFragment extends Fragment {
         articleCursor.moveToFirst();
         
         articleTitle.setText(articleCursor.getString(articleCursor.getColumnIndex(DatabaseConstants.TITLE)));
-        articleShortDesc.setText(articleCursor.getString(articleCursor.getColumnIndex(DatabaseConstants.SHORT_DESC)));
-        articleLongDesc.setText(articleCursor.getString(articleCursor.getColumnIndex(DatabaseConstants.LONG_DESC)));
+        articleShortDesc.setText(Html.fromHtml(articleCursor.getString(articleCursor.getColumnIndex(DatabaseConstants.SHORT_DESC)) + "<br/>", null, htmlTagHandler));
+        articleLongDesc.setText(Html.fromHtml(articleCursor.getString(articleCursor.getColumnIndex(DatabaseConstants.LONG_DESC)), null, htmlTagHandler));
         
         String image = articleCursor.getString(articleCursor.getColumnIndex(DatabaseConstants.PICTURE));
 		String imageUri = getActivity().getResources().getString(R.string.news_images) + image;

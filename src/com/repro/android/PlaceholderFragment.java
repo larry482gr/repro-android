@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.repro.android.adapters.NewsAdapter;
 import com.repro.android.entities.ArticlesModel;
 import com.repro.android.entities.StaticContent;
+import com.repro.android.utilities.HtmlTagHandler;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -102,14 +104,16 @@ public class PlaceholderFragment extends Fragment {
 		Configuration config = rootView.getContext().getResources().getConfiguration();
         Locale locale = config.locale;
         
-		WebView researchProgram = (WebView) rootView.findViewById(R.id.research_program);
+		TextView researchProgram = (TextView) rootView.findViewById(R.id.research_program);
+		HtmlTagHandler htmlTagHandler = new HtmlTagHandler();
+		
 		if(locale.toString().equals("el_GR")) {
-			researchProgram.loadDataWithBaseURL(null, StaticContent.RESEARCH_PROGRAM_TITLE_GR+StaticContent.RESEARCH_PROGRAM_CONTENT_GR, 
-								 "text/html","utf-8", null);
+			// researchProgram.loadDataWithBaseURL(null, StaticContent.RESEARCH_PROGRAM_TITLE_GR+StaticContent.RESEARCH_PROGRAM_CONTENT_GR, "text/html","utf-8", null);
+			researchProgram.setText(Html.fromHtml(StaticContent.RESEARCH_PROGRAM_TITLE_GR + StaticContent.RESEARCH_PROGRAM_CONTENT_GR, null, htmlTagHandler));
 		}
 		else {
-			researchProgram.loadDataWithBaseURL(null, StaticContent.RESEARCH_PROGRAM_TITLE_EN+StaticContent.RESEARCH_PROGRAM_CONTENT_EN, 
-					 "text/html","utf-8", null);
+			// researchProgram.loadDataWithBaseURL(null, StaticContent.RESEARCH_PROGRAM_TITLE_EN+StaticContent.RESEARCH_PROGRAM_CONTENT_EN, "text/html","utf-8", null);
+			researchProgram.setText(Html.fromHtml(StaticContent.RESEARCH_PROGRAM_TITLE_EN + StaticContent.RESEARCH_PROGRAM_CONTENT_EN, null, htmlTagHandler));
 		}
 		
         // Toast.makeText(getActivity(), locale.toString(), Toast.LENGTH_LONG).show();

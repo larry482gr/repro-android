@@ -99,6 +99,7 @@ public class NewsAdapter extends CursorAdapter {
 					.beginTransaction()
 					.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
 					.replace(R.id.container, ArticleFragment.newInstance(articleId))
+					.addToBackStack(null)
 					.commit();
 				
 				// Toast.makeText(mContext, Long.toString(articleId), Toast.LENGTH_SHORT).show();
