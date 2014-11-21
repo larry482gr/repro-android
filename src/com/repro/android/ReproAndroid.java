@@ -1,17 +1,43 @@
 package com.repro.android;
 
+import java.util.Locale;
+
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.preference.PreferenceManager;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.repro.android.utilities.Constants;
 
 public class ReproAndroid extends Application {
+	private final String TAG = "ReproAndroid";
+	public static SharedPreferences prefs;
+	
 	public void onCreate() {
 		super.onCreate();
 		initImageLoader(getApplicationContext());
+		
+		prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		String language = prefs.getString(Constants.LOCALE, Constants.DEFAULT_LOCALE);
+		Configuration config = getBaseContext().getResources().getConfiguration();
+		Locale locale = null;
+		if(language.equals("en")) {
+			locale = Locale.ENGLISH;
+			prefs.edit().putString(Constants.LANGUAGE_ID, Constants.ENGLISH_ID).commit();
+		}
+		else {
+			locale = Locale.getDefault();
+			prefs.edit().putString(Constants.LANGUAGE_ID, Constants.GREEK_ID).commit();
+		}
+		config.locale = locale;
+		getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+		
+		prefs.edit().putBoolean(Constants.JUST_LAUNCHED, true).commit();
 	}
 	
 	public static void initImageLoader(Context context) {

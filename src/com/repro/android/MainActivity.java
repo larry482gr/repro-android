@@ -1,6 +1,5 @@
 package com.repro.android;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 import android.app.ActionBar;
@@ -17,11 +16,10 @@ import android.os.Looper;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 
 import com.repro.android.asynctasks.NewsAsyncTask;
 import com.repro.android.dialogs.Dialogs;
-import com.repro.android.entities.Article;
+import com.repro.android.utilities.Constants;
 import com.repro.android.utilities.NetworkUtilities;
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -39,8 +37,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	private CharSequence mTitle;
 
 	private Context mContext;
-	
-	public static ArrayList<Article> articles;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,15 +57,15 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(null == articles) {
-			articles = new ArrayList<Article>();
-			preloadArticles(articles);
+		if(ReproAndroid.prefs.getBoolean(Constants.JUST_LAUNCHED, true)) {
+			preloadArticles();
+			ReproAndroid.prefs.edit().putBoolean(Constants.JUST_LAUNCHED, false).commit();
 		}
 	}
 	
-	private void preloadArticles(final ArrayList<Article> articles) {
+	private void preloadArticles() {
 		if(NetworkUtilities.isConnectedToInternet(this)) {
-			NewsAsyncTask news = new NewsAsyncTask(this, articles);
+			NewsAsyncTask news = new NewsAsyncTask(this);
 			news.execute(new String[] { "all" });
 		}
 		else {
@@ -89,7 +85,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 					
 					mHandler.postDelayed(new Runnable(){
 						public void run() {
-							preloadArticles(articles);
+							preloadArticles();
 					    }
 					}, 5000);
 				}
@@ -104,9 +100,10 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager
-				.beginTransaction()
-				.replace(R.id.container,
-						PlaceholderFragment.newInstance(position + 1)).commit();
+			.beginTransaction()
+			.replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+			.addToBackStack(null)
+			.commit();
 	}
 
 	public void onSectionAttached(int number) {
@@ -157,15 +154,21 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			public void onClick(DialogInterface dialog, int which) {
 				Configuration config = getBaseContext().getResources().getConfiguration();
 				Locale locale = null;
+				String langId = null;
+				
 				if(which == 0) {
 					locale = Locale.ENGLISH;
+					langId = Constants.ENGLISH_ID;
 				}
 				else if(which == 1) {
 					locale = Locale.getDefault();
+					langId = Constants.GREEK_ID;
 				}
 				
 				config.locale = locale;
 				getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+				ReproAndroid.prefs.edit().putString(Constants.LOCALE, locale.toString()).commit();
+				ReproAndroid.prefs.edit().putString(Constants.LANGUAGE_ID, langId).commit();
 				
 				recreate();
 			}

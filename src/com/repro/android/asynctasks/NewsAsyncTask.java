@@ -18,23 +18,24 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
 import com.repro.android.R;
-import com.repro.android.entities.Article;
+import com.repro.android.entities.ArticlesModel;
 
 public class NewsAsyncTask extends HTTPAsyncTask {
 	private String TAG = "NewsAsyncTask";
 	private String id_param;
-	private ArrayList<Article> articles;
+	private ArticlesModel articlesModel;
+	// private ArrayList<Article> articles;
 	// private ProgressDialog dialog;
 	
-    public NewsAsyncTask(Context context, ArrayList<Article> articles) {
+    public NewsAsyncTask(Context context) {
     	super(context);
     	// this.dialog = new ProgressDialog(context);
-    	this.articles = articles;
+    	// this.articles = articles;
+    	articlesModel = new ArticlesModel(mContext);
 	}
     
     @Override
@@ -61,10 +62,9 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 			if(null != id_param) {
 				nameValuePairs.add(new BasicNameValuePair("id", id_param));
 			}
-			else {
-				// TODO Refactor this to actually send user's preferred language.
-				nameValuePairs.add(new BasicNameValuePair("langId", "2"));
-			}
+			
+			int lastId = articlesModel.getLastId();
+			nameValuePairs.add(new BasicNameValuePair("last_id", Integer.toString(lastId)));
 			
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -103,7 +103,7 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 			Log.i(TAG, "Response JSON Objects: " + json_response.length());
 			createArticles(json_response);
 		} catch(NullPointerException e) {
-			Log.d(TAG, e.getLocalizedMessage());
+			Log.d(TAG, "NullPointerException (line 107): Server response was null!");
 		}
 	}
 
@@ -111,8 +111,7 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 		// ListView newsList = (ListView) newsView.findViewById(R.id.news_list);
 		for (int i = 0; i < json_response.length(); i++) {
 			try {
-				Article article = new Article(json_response.getJSONObject(i));
-				articles.add(article);
+				articlesModel.createArticle(json_response.getJSONObject(i));
 			} catch (JSONException e) {
 				Log.d(TAG, e.getLocalizedMessage());
 			}

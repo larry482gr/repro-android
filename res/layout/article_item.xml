@@ -19,7 +19,6 @@
         android:scaleType="center"
         android:src="@drawable/ic_launcher" />
     
-    
     <HorizontalScrollView
         android:id="@+id/article_title_view"
         android:layout_width="match_parent"
@@ -55,6 +54,6 @@
         android:ellipsize="end"
         android:textSize="12sp"
         android:textColor="#444"
-        android:text="Sample Title" />
+        android:text="Sample Short Description" />
 
 </RelativeLayout>
