@@ -97,7 +97,7 @@ public class NewsAdapter extends CursorAdapter {
 				FragmentManager fragmentManager = mContext.getFragmentManager();
 				fragmentManager
 					.beginTransaction()
-					.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right)
+					.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right, R.animator.slide_in_right, R.animator.slide_out_left)
 					.replace(R.id.container, ArticleFragment.newInstance(articleId))
 					.addToBackStack(null)
 					.commit();

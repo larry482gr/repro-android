@@ -7,12 +7,12 @@ import android.os.AsyncTask;
 
 import com.repro.android.R;
 
-abstract class HTTPAsyncTask extends AsyncTask<String, Void, JSONArray> {
-	private String TAG = "HTTPAsyncTask";
+abstract class HttpJsonAsyncTask extends AsyncTask<String, Void, JSONArray> {
+	private String TAG = "HttpJsonAsyncTask";
 	protected Context mContext;
 	protected String domain_url; // , param_separator, param_operator, action_param, id_param;
 	
-	public HTTPAsyncTask(Context context) {
+	public HttpJsonAsyncTask(Context context) {
 		this.mContext = context;
 		this.domain_url = context.getResources().getString(R.string.domain_url);
 		

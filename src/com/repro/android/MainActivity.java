@@ -38,6 +38,10 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
 	private Context mContext;
 
+	private String TAG = "MainActivity";
+
+	private CharSequence previousActionBarTitle;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -107,13 +111,14 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	}
 
 	public void onSectionAttached(int number) {
+		previousActionBarTitle = getActionBar().getTitle();
 		String[] menu_items = getResources().getStringArray(R.array.menu_items);
 		mTitle = menu_items[number-1];
 	}
 
 	public void restoreActionBar() {
 		ActionBar actionBar = getActionBar();
-		// actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setTitle(mTitle);
 	}
@@ -175,6 +180,5 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		};
 		Builder alertDialog = Dialogs.optionDialog(mContext, title, options, connect);
 		alertDialog.create().show();
-		
 	}
 }

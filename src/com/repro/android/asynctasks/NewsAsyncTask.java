@@ -24,7 +24,7 @@ import android.util.Log;
 import com.repro.android.R;
 import com.repro.android.entities.ArticlesModel;
 
-public class NewsAsyncTask extends HTTPAsyncTask {
+public class NewsAsyncTask extends HttpJsonAsyncTask {
 	private String TAG = "NewsAsyncTask";
 	private String id_param;
 	private ArticlesModel articlesModel;
@@ -53,7 +53,8 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 		id_param = params.length == 1 ? null : params[1];
 		
 		String url = super.domain_url + news_url;
-		Log.i(TAG, "URL: " + url);
+		// Log.i(TAG, "URL: " + url);
+		
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(url);
 		try {
@@ -74,17 +75,16 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 			Log.e(TAG, "HTTP response code: " + Integer.toString(http_response.getStatusLine().getStatusCode()));
 			if (http_response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				entity = http_response.getEntity();
-				Log.i(TAG, "Entity: " + entity.toString());
-				// response = Utilities._getResponseBody(entity);
 				
 				String response = null;
 				try {
 					response = EntityUtils.toString(entity);
 					json_response = new JSONArray(response);
 				} catch (Exception e) {
-					Log.d(TAG, "Parse JSON Exception");
+					Log.e(TAG, "Parse JSON Exception");
 					Log.e(TAG, "Exception Message:\n" + e.getLocalizedMessage());
-					Log.i(TAG, "Response was:\n" + response);
+					Log.e(TAG, "Response was:\n" + String.valueOf(response));
+					Log.e(TAG, "JSON Response was:\n" + String.valueOf(response));
 				}
 			}
 		} catch (ClientProtocolException e) {
@@ -93,7 +93,6 @@ public class NewsAsyncTask extends HTTPAsyncTask {
 			Log.i(TAG, "IOException");
 		}
 		
-		Log.d(TAG, String.valueOf(json_response));
 		return json_response;
     }
 	

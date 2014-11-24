@@ -8,7 +8,7 @@
 	        android:propertyName="X"
 	        android:valueType="floatType"
 	        android:valueFrom="0"
-	        android:valueTo="-1000"
+	        android:valueTo="-1600"
 	        android:duration="@android:integer/config_mediumAnimTime" />
 	
 	<objectAnimator

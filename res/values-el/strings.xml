@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
+    <string name="app_name">Υποβοηθούμενη Αναπαραγωγή</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_language">Γλωσσα</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Επιλογές</string>
     
     <!-- Language Strings -->
     	<string name="lang_select">Επιλογή Γλώσσας</string>
 	    <string name="lang_english">Αγγλικά</string>
 	    <string name="lang_greek">Ελληνικά</string>
 	<!-- Language Strings -->
+	
+	<!-- Form Strings -->
+		<string name="all_required">Όλα τα πεδία είναι υποχρεωτικά.</string>
+	<!-- Form Strings -->
     
     <!-- Menu Strings -->
 	    <string name="research_team">Επιστημονική Ομάδα</string>
@@ -24,15 +29,21 @@
 	    <string name="contact">Επικοινωνία</string>
 	<!-- Menu Strings -->
 	
+	<!-- Button Strings -->
+		<string name="send_button">Αποστολή</string>
+	<!-- Button Strings -->
+	
 	<!-- Dialogs Strings -->
-		<string name="no_connection_msg">Please make sure you have an active internet connection in order to receive the latest content.</string>
-	    <string name="news_no_connection_msg">Please enable Wi-Fi or mobile data in order to receive the latest news</string>
-	    <string name="enable_wifi">Enable Wi-Fi</string>
-	    <string name="enable_mobile">Enable Mobile Data</string>
-	    <string name="enabling_wifi">Enabling Wi-Fi...</string>
-	    <string name="enabling_mobile">Enabling Mobile Data...</string>
+		<string name="no_connection_msg">Μία ενεργή σύνδεση απαιτείται για να λάβετε το πιο πρόσφατο περιεχόμενο.</string>
+	    <string name="news_no_connection_msg">Παρακαλώ ενεργομοιήστε μία σύνδεση, προκειμένου να λάβετε τα τελευταία νέα.</string>
+	    <string name="enable_wifi">Ενεργοποίηση Wi-Fi</string>
+	    <string name="enable_mobile">Ενεργοποίηση Δεδομένων</string>
+	    <string name="enabling_wifi">Ενεργοποιείται το Wi-Fi...</string>
+	    <string name="enabling_mobile">Ενεργοποιούνται τα Δεδομένα...</string>
+	    <string name="connection_failure">Αποτυχία σύνδεσης.</string>
+	    <string name="check_network">Παρακαλώ ελέγξτε το δίκτυο σας και δοκιμάστε ξανά.</string>
 		<string name="accept">Ok</string>
-	    <string name="cancel">Cancel</string>
+	    <string name="cancel">Άκυρο</string>
 	<!-- Dialogs Strings -->
 	
 	<string name="domain_url">http://repro.law.auth.gr/api/</string>
@@ -55,5 +66,13 @@
 	<!-- URL Image Strings -->
 		<string name="news_images">http://repro.law.auth.gr/resources/images/news/</string>
 	<!-- URL Image Strings -->
+	
+	<!-- Contact Us -->
+		<string name="contact_form">Φόρμα Επικοινωνίας</string>
+		<string name="contact_full_name">Ονοματεπώνυμο:</string>
+		<string name="contact_subject">Θέμα:</string>
+		<string name="contact_message">Μήνυμα:</string>
+		<string name="email_no_connection_msg">Απαιτείται ενεργή σύνδεση για να στείλετε email.</string>
+	<!-- Contact Us -->
 	
 </resources>

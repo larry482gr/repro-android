@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_title">Assisted Human Reproduction</string>
     <string name="app_name">Assisted Human Reproduction</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -13,6 +14,10 @@
 	    <string name="lang_english">English</string>
 	    <string name="lang_greek">Greek</string>
 	<!-- Language Strings -->
+	
+	<!-- Form Strings -->
+		<string name="all_required">All fields are required.</string>
+	<!-- Form Strings -->
     
     <!-- Menu Strings -->
 	    <string name="research_team">Research Team</string>
@@ -25,13 +30,19 @@
 	    <string name="contact">Contact Us</string>
 	<!-- Menu Strings -->
 	
+	<!-- Button Strings -->
+		<string name="send_button">Send</string>
+	<!-- Button Strings -->
+	
 	<!-- Dialogs Strings -->
-		<string name="no_connection_msg">Please make sure you have an active internet connection in order to receive the latest content.</string>
-	    <string name="news_no_connection_msg">Please enable Wi-Fi or mobile data in order to receive the latest news</string>
+		<string name="no_connection_msg">Αn active internet connection in needed to receive the latest content.</string>
+	    <string name="news_no_connection_msg">Please enable Wi-Fi or mobile data in order to receive the latest news.</string>
 	    <string name="enable_wifi">Enable Wi-Fi</string>
 	    <string name="enable_mobile">Enable Mobile Data</string>
 	    <string name="enabling_wifi">Enabling Wi-Fi...</string>
 	    <string name="enabling_mobile">Enabling Mobile Data...</string>
+	    <string name="connection_failure">Connection failure.</string>
+	    <string name="check_network">Please check your network and try again.</string>
 		<string name="accept">Ok</string>
 	    <string name="cancel">Cancel</string>
 	<!-- Dialogs Strings -->
@@ -39,6 +50,7 @@
 	<string name="domain_url">http://repro.law.auth.gr/api/</string>
 	<!-- URL Script Strings -->
 		<string name="news_script">news.php?</string>
+		<string name="contact_script">contact.php?</string>
 	<!-- URL Script Strings -->
 		
 	<!-- URL Params Strings -->
@@ -56,5 +68,14 @@
 	<!-- URL Image Strings -->
 		<string name="news_images">http://repro.law.auth.gr/resources/images/news/</string>
 	<!-- URL Image Strings -->
+	
+	<!-- Contact Us -->
+		<string name="contact_form">Contact Form</string>
+		<string name="contact_full_name">Full Name:</string>
+		<string name="contact_email">Email:</string>
+		<string name="contact_subject">Subject:</string>
+		<string name="contact_message">Message:</string>
+		<string name="email_no_connection_msg">You need an active connection to send email.</string>
+	<!-- Contact Us -->
 	
 </resources>
