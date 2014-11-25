@@ -77,15 +77,15 @@
 		<string name="contact_message">Message:</string>
 		<string name="email_no_connection_msg">You need an active connection to send email.</string>
 		<string name="contact_kast_name">Ε. Symeonidou - Kastanidou</string>
-		<string name="contact_kast_office">Faculty of Law, AUTH University Campus</string>
+		<string name="contact_kast_office">Faculty of Law,\nAUTH University Campus</string>
 		<string name="contact_kast_post">54124 Thessaloniki, Greece</string>
-		<string name="contact_kast_tel">Tel: (0030) 2310 99 6496</string>
-		<string name="contact_kast_fax">Fax: (0030) 2310 99 6494</string>
+		<string name="contact_kast_tel">Tel: 0030 2310996496</string>
+		<string name="contact_kast_fax">Fax: 0030 2310996494</string>
 		<string name="contact_kast_email">kastan@law.auth.gr</string>
 		<string name="contact_tarl_name">B. Τarlatzis</string>
-		<string name="contact_tarl_office">Faculty of Health Sciences,\nSchool of Medicine, AUTH University Campus</string>
+		<string name="contact_tarl_office">Faculty of Health Sciences,\nSchool of Medicine,\nAUTH University Campus</string>
 		<string name="contact_tarl_post">54124 Thessaloniki, Greece</string>
-		<string name="contact_tarl_tel">Tel: (0030) 2310 99 1182</string>
+		<string name="contact_tarl_tel">Tel: 0030 2310991182</string>
 		<string name="contact_tarl_email">tarlatzis@gmail.com</string>
 	<!-- Contact Us -->
 	

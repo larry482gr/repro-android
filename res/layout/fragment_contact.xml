@@ -18,6 +18,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentTop="true"
 	        android:layout_centerHorizontal="true"
+	        android:textStyle="bold"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 	    
 	    <TextView
@@ -214,22 +215,11 @@
 	            android:text="@string/contact_kast_email"
 	            android:autoLink="email" />
 	        
-	    </LinearLayout>
-	    
-	    <LinearLayout
-	        android:id="@+id/contact_tarl_layout"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerHorizontal="true"
-	        android:layout_below="@+id/contact_kast_layout"
-	        android:layout_marginTop="16dp"
-	        android:layout_marginBottom="16dp"
-	        android:orientation="vertical" >
-	        
 	        <TextView
 	            android:id="@+id/contact_tarl_name"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:layout_marginTop="8dp"
 	            android:textStyle="bold"
 	            android:text="@string/contact_tarl_name" />
 	        
