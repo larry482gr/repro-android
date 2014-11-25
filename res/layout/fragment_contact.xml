@@ -2,7 +2,11 @@
 
 <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
     
     <RelativeLayout
 	    android:layout_width="match_parent"
@@ -14,7 +18,6 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentTop="true"
 	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="8dp"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 	    
 	    <TextView
@@ -176,37 +179,40 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textStyle="bold"
-	            android:text="Ε. Συμεωνίδου – Καστανίδου" />
+	            android:text="@string/contact_kast_name" />
 	        
 	        <TextView
 	            android:id="@+id/contact_kast_office"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="Νομική Σχολή ΑΠΘ, γρ. 205" />
+	            android:text="@string/contact_kast_office" />
 	          
 	        <TextView
 	            android:id="@+id/contact_kast_post"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="54124 Θεσσαλονίκη, Ελλάδα" />
+	            android:text="@string/contact_kast_post"
+	            android:autoLink="map" />
 	        
 	        <TextView
 	            android:id="@+id/contact_kast_tel"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="Τηλ: 2310 996496 / 344308" />
+	            android:text="@string/contact_kast_tel"
+	            android:autoLink="phone" />
 	        
 	        <TextView
 	            android:id="@+id/contact_kast_fax"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="Φαξ: 2310 996494" />
+	            android:text="@string/contact_kast_fax" />
 	        
 	        <TextView
 	            android:id="@+id/contact_kast_email"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="kastan@law.auth.gr" />
+	            android:text="@string/contact_kast_email"
+	            android:autoLink="email" />
 	        
 	    </LinearLayout>
 	    
@@ -225,31 +231,34 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:textStyle="bold"
-	            android:text="B. Ταρλατζής" />
+	            android:text="@string/contact_tarl_name" />
 	        
 	        <TextView
 	            android:id="@+id/contact_tarl_office"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="Σχολή Επιστημών Υγείας AΠΘ" />
+	            android:text="@string/contact_tarl_office" />
 	          
 	        <TextView
 	            android:id="@+id/contact_tarl_post"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="54124 Θεσσαλονίκη, Ελλάδα" />
+	            android:text="@string/contact_tarl_post"
+	            android:autoLink="map" />
 	        
 	        <TextView
 	            android:id="@+id/contact_tarl_tel"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="Τηλ: 2310 991182" />
+	            android:text="@string/contact_tarl_tel"
+	            android:autoLink="phone" />
 	        
 	        <TextView
 	            android:id="@+id/contact_tarl_email"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="tarlatzis@gmail.com" />
+	            android:text="@string/contact_tarl_email"
+	            android:autoLink="email" />
 	        
 	    </LinearLayout>
 	

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="app_name">Υποβοηθούμενη Αναπαραγωγή</string>
+    <string name="app_title">Υποβοηθούμενη Αναπαραγωγή</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
@@ -73,6 +73,17 @@
 		<string name="contact_subject">Θέμα:</string>
 		<string name="contact_message">Μήνυμα:</string>
 		<string name="email_no_connection_msg">Απαιτείται ενεργή σύνδεση για να στείλετε email.</string>
+		<string name="contact_kast_name">Ε. Συμεωνίδου – Καστανίδου</string>
+		<string name="contact_kast_office">Νομική Σχολή ΑΠΘ, γρ. 205</string>
+		<string name="contact_kast_post">54124 Θεσσαλονίκη, Ελλάδα</string>
+		<string name="contact_kast_tel">Τηλ: 2310 996496 / 2310 344308</string>
+		<string name="contact_kast_fax">Φαξ: 2310 996494</string>
+		<string name="contact_kast_email">kastan@law.auth.gr</string>
+		<string name="contact_tarl_name">B. Ταρλατζής</string>
+		<string name="contact_tarl_office">Σχολή Επιστημών Υγείας AΠΘ</string>
+		<string name="contact_tarl_post">54124 Θεσσαλονίκη, Ελλάδα</string>
+		<string name="contact_tarl_tel">Τηλ: 2310 991182</string>
+		<string name="contact_tarl_email">tarlatzis@gmail.com</string>
 	<!-- Contact Us -->
 	
 </resources>

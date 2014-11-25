@@ -160,9 +160,6 @@ public class PlaceholderFragment extends Fragment {
 	}
 	
 	private void initContactFragment(View rootView) {
-		// Configuration config = rootView.getContext().getResources().getConfiguration();
-        // Locale locale = config.locale;
-		
 		Resources resources = getActivity().getResources();
         
         final TextView contactFormTitle = (TextView) rootView.findViewById(R.id.contact_form_title);

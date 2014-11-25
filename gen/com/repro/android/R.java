@@ -1902,8 +1902,8 @@ containing a value of this type.
  Form Strings 
          */
         public static final int all_required=0x7f0b0019;
-        public static final int app_name=0x7f0b0010;
-        public static final int app_title=0x7f0b000f;
+        public static final int app_name=0x7f0b000f;
+        public static final int app_title=0x7f0b0010;
         public static final int cancel=0x7f0b002c;
         public static final int check_network=0x7f0b002a;
         public static final int connection_failure=0x7f0b0029;
@@ -1916,9 +1916,20 @@ containing a value of this type.
          */
         public static final int contact_form=0x7f0b0037;
         public static final int contact_full_name=0x7f0b0038;
+        public static final int contact_kast_email=0x7f0b0042;
+        public static final int contact_kast_fax=0x7f0b0041;
+        public static final int contact_kast_name=0x7f0b003d;
+        public static final int contact_kast_office=0x7f0b003e;
+        public static final int contact_kast_post=0x7f0b003f;
+        public static final int contact_kast_tel=0x7f0b0040;
         public static final int contact_message=0x7f0b003b;
         public static final int contact_script=0x7f0b002f;
         public static final int contact_subject=0x7f0b003a;
+        public static final int contact_tarl_email=0x7f0b0047;
+        public static final int contact_tarl_name=0x7f0b0043;
+        public static final int contact_tarl_office=0x7f0b0044;
+        public static final int contact_tarl_post=0x7f0b0045;
+        public static final int contact_tarl_tel=0x7f0b0046;
         /**  Dialogs Strings 
  Dialogs Strings 
          */

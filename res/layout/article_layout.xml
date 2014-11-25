@@ -48,6 +48,8 @@
 	        android:layout_marginStart="6dp"
 	        android:textSize="14sp"
 	        android:textColor="#444"
+	        android:textColorLink="#444"
+	        android:textColorHighlight="#444"
 	        android:text="Sample Short Description"
 	        android:autoLink="web" />
 	    
@@ -60,6 +62,8 @@
 	        android:layout_alignStart="@+id/article_layout_image"
 	        android:textSize="14sp"
 	        android:textColor="#444"
+	        android:textColorLink="#444"
+	        android:textColorHighlight="#444"
 	        android:text="Sample Long Description"
 	        android:autoLink="web" />
 	    

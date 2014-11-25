@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_title">Assisted Human Reproduction</string>
     <string name="app_name">Assisted Human Reproduction</string>
+    <string name="app_title">Assisted Human Reproduction</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
@@ -76,6 +76,17 @@
 		<string name="contact_subject">Subject:</string>
 		<string name="contact_message">Message:</string>
 		<string name="email_no_connection_msg">You need an active connection to send email.</string>
+		<string name="contact_kast_name">Ε. Symeonidou - Kastanidou</string>
+		<string name="contact_kast_office">Faculty of Law, AUTH University Campus</string>
+		<string name="contact_kast_post">54124 Thessaloniki, Greece</string>
+		<string name="contact_kast_tel">Tel: (0030) 2310 99 6496</string>
+		<string name="contact_kast_fax">Fax: (0030) 2310 99 6494</string>
+		<string name="contact_kast_email">kastan@law.auth.gr</string>
+		<string name="contact_tarl_name">B. Τarlatzis</string>
+		<string name="contact_tarl_office">Faculty of Health Sciences,\nSchool of Medicine, AUTH University Campus</string>
+		<string name="contact_tarl_post">54124 Thessaloniki, Greece</string>
+		<string name="contact_tarl_tel">Tel: (0030) 2310 99 1182</string>
+		<string name="contact_tarl_email">tarlatzis@gmail.com</string>
 	<!-- Contact Us -->
 	
 </resources>
