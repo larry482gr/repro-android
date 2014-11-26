@@ -29,7 +29,7 @@ import com.repro.android.R;
 import com.repro.android.database.DatabaseConstants;
 import com.repro.android.utilities.HTTPUtilities;
 
-public class NewsAdapter extends CursorAdapter {
+public class MembersAdapter extends CursorAdapter {
 	private static final String TAG = "NewsAdapter";
 	private Activity mContext;
 	private LayoutInflater inflater;
@@ -37,11 +37,11 @@ public class NewsAdapter extends CursorAdapter {
 	private DisplayImageOptions options;
 	// private Cursor articlesCursor;
 
-	public NewsAdapter(Context context, Cursor articlesCursor, int flags) {
-		super(context, articlesCursor, flags);
+	public MembersAdapter(Context context, Cursor membersCursor, int flags) {
+		super(context, membersCursor, flags);
 		this.mContext = (Activity) context;
 		this.inflater = LayoutInflater.from(context);
-		Log.d(TAG, "Total Articles: " + articlesCursor.getCount());
+		Log.d(TAG, "Total Members: " + membersCursor.getCount());
 		
 		// Image loader options
 		options = new DisplayImageOptions.Builder()
@@ -92,8 +92,7 @@ public class NewsAdapter extends CursorAdapter {
 				FragmentManager fragmentManager = mContext.getFragmentManager();
 				fragmentManager
 					.beginTransaction()
-					.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right,
-										 R.animator.slide_in_right, R.animator.slide_out_left)
+					.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right, R.animator.slide_in_right, R.animator.slide_out_left)
 					.replace(R.id.container, ArticleFragment.newInstance(articleId))
 					.addToBackStack(null)
 					.commit();
@@ -106,10 +105,10 @@ public class NewsAdapter extends CursorAdapter {
 	}
 	
 	private static class ViewHolder {
-		ImageView articleImage;
-		TextView articleTitle;
-		TextView articleShortDesc;
-		OnClickListener articleClick;
+		ImageView memberImage;
+		TextView memberName;
+		TextView memberCV;
+		OnClickListener memberContact;
 	}
 	
 	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {

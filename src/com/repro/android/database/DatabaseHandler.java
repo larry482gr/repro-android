@@ -39,6 +39,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DatabaseConstants.CREATE_NEWS_TABLE);
+		db.execSQL(DatabaseConstants.CREATE_GROUPS_TABLE);
+		db.execSQL(DatabaseConstants.CREATE_MEMBERS_TABLE);
 	}
 
 	/* (non-Javadoc)
@@ -47,6 +49,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_NEWS);
+		db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_GROUPS);
+		db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_MEMBERS);
 		
 		onCreate(db);
 	}
@@ -70,7 +74,4 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = getDb();
 		db.delete(table, null, null);
 	}
-	
-	// TODO Model Methods or even better create a DAO Factory.
-	
 }

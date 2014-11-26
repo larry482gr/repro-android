@@ -2,9 +2,15 @@ package com.repro.android;
 
 import java.util.Locale;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.app.AlertDialog.Builder;
 import android.app.Fragment;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,15 +18,22 @@ import android.os.Looper;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.repro.android.adapters.NewsAdapter;
+import com.repro.android.asynctasks.SendEmail;
+import com.repro.android.dialogs.Dialogs;
 import com.repro.android.entities.ArticlesModel;
 import com.repro.android.entities.StaticContent;
 import com.repro.android.utilities.HtmlTagHandler;
+import com.repro.android.utilities.NetworkUtilities;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -45,6 +58,8 @@ public class PlaceholderFragment extends Fragment {
 		return fragment;
 	}
 
+	private String TAG = "PlaceholderFragment";
+
 	public PlaceholderFragment() {
 	}
 
@@ -66,16 +81,23 @@ public class PlaceholderFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		initView(getView(), tabId);
+		setActionBarTitle();
 	}
 
 	private int getFragment(int tabId) {
 		int fragmentId = -1;
 		switch(tabId) {
+			case 1:
+				fragmentId = R.layout.fragment_members;
+				break;
 			case 2:
 				fragmentId = R.layout.fragment_research_program;
 				break;
 			case 3:
 				fragmentId = R.layout.fragment_news_list;
+				break;
+			case 8:
+				fragmentId = R.layout.fragment_contact;
 				break;
 			default:
 				fragmentId = R.layout.fragment_main;
@@ -87,18 +109,45 @@ public class PlaceholderFragment extends Fragment {
 	
 	private void initView(View rootView, int tabId) {
 		switch(tabId) {
+			case 1:
+				initMembersFragment(rootView);
+				break;
 			case 2:
 				initResearchProgramFragment(rootView);
 				break;
 			case 3:
 				initNewsFragment(rootView);
 				break;
+			case 8:
+				initContactFragment(rootView);
+				break;
 			default:
-				initMainFragment(rootView, tabId);
+				initMainFragment(rootView);
 				break;
 		}
 	}
 
+	private void setActionBarTitle() {
+		String[] menuItems = getResources().getStringArray(R.array.menu_items);
+		getActivity().getActionBar().setTitle(menuItems[tabId-1]);
+		
+	}
+
+	private void initMembersFragment(final View rootView) {
+		// Implement members GridView adapter.
+		Handler mHandler = new Handler(Looper.getMainLooper());
+		
+		mHandler.postDelayed(new Runnable(){
+			public void run() {
+				ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
+				ArticlesModel articlesModel = new ArticlesModel(getActivity());
+				Cursor articlesCursor = articlesModel.findArticles();
+				NewsAdapter mAdapter = new NewsAdapter(getActivity(), articlesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+				newsList.setAdapter(mAdapter);
+		    }
+		}, 400);
+	}
+	
 	private void initResearchProgramFragment(View rootView) {
 		Configuration config = rootView.getContext().getResources().getConfiguration();
         Locale locale = config.locale;
@@ -107,16 +156,11 @@ public class PlaceholderFragment extends Fragment {
 		HtmlTagHandler htmlTagHandler = new HtmlTagHandler();
 		
 		if(locale.toString().equals("el_GR")) {
-			// researchProgram.loadDataWithBaseURL(null, StaticContent.RESEARCH_PROGRAM_TITLE_GR+StaticContent.RESEARCH_PROGRAM_CONTENT_GR, "text/html","utf-8", null);
 			researchProgram.setText(Html.fromHtml(StaticContent.RESEARCH_PROGRAM_TITLE_GR + StaticContent.RESEARCH_PROGRAM_CONTENT_GR, null, htmlTagHandler));
 		}
 		else {
-			// researchProgram.loadDataWithBaseURL(null, StaticContent.RESEARCH_PROGRAM_TITLE_EN+StaticContent.RESEARCH_PROGRAM_CONTENT_EN, "text/html","utf-8", null);
 			researchProgram.setText(Html.fromHtml(StaticContent.RESEARCH_PROGRAM_TITLE_EN + StaticContent.RESEARCH_PROGRAM_CONTENT_EN, null, htmlTagHandler));
 		}
-		
-        // Toast.makeText(getActivity(), locale.toString(), Toast.LENGTH_LONG).show();
-		
 	}
 	
 	private void initNewsFragment(final View rootView) {
@@ -132,8 +176,130 @@ public class PlaceholderFragment extends Fragment {
 		    }
 		}, 400);
 	}
+	
+	private void initContactFragment(View rootView) {
+		Resources resources = getActivity().getResources();
+        
+        final TextView contactFormTitle = (TextView) rootView.findViewById(R.id.contact_form_title);
+        final TextView fullNameLabel = (TextView) rootView.findViewById(R.id.full_name_label);
+        final TextView subjectLabel = (TextView) rootView.findViewById(R.id.subject_label);
+        final TextView messageLabel = (TextView) rootView.findViewById(R.id.message_label);
+		final EditText fullNameInput = (EditText) rootView.findViewById(R.id.full_name_input);
+		final EditText emailInput = (EditText) rootView.findViewById(R.id.email_input);
+		final EditText subjectInput = (EditText) rootView.findViewById(R.id.subject_input);
+		final EditText messageInput = (EditText) rootView.findViewById(R.id.message_input);
+		final TextView allRequired = (TextView) rootView.findViewById(R.id.all_required);
+		final Button sendButton = (Button) rootView.findViewById(R.id.send_button);
+		
+		contactFormTitle.setText(resources.getString(R.string.contact_form));
+		fullNameLabel.setText(resources.getString(R.string.contact_full_name));
+		subjectLabel.setText(resources.getString(R.string.contact_subject));
+		messageLabel.setText(resources.getString(R.string.contact_message));
+		sendButton.setText(resources.getString(R.string.send_button));
+		
+		sendButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Handler mHandler = new Handler(Looper.getMainLooper());
+				
+				if(NetworkUtilities.isConnectedToInternet(getActivity())) {
+					String[] contactParams = new String[] { fullNameInput.getText().toString().trim(), 
+															emailInput.getText().toString().trim(), 
+															subjectInput.getText().toString().trim(), 
+															messageInput.getText().toString().trim(),
+															"0" };
+					
+					boolean noEmptyField = true;
+					for(String param : contactParams) {
+						if(param.length() == 0) {
+							noEmptyField = false;
+							showErrorMessage(mHandler, allRequired);
+							break;
+						}
+					}
+					
+					if(noEmptyField) {
+						SendEmail sendEmail = new SendEmail(getActivity());
+						sendEmail.execute(contactParams);
+					}
+				} else {
+					String title = getResources().getString(R.string.email_no_connection_msg);
+					String[] options = new String[] { getResources().getString(R.string.enable_wifi), getResources().getString(R.string.enable_mobile) };
+					android.content.DialogInterface.OnClickListener connect = new android.content.DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							final ProgressDialog enablingConnection = new ProgressDialog(getActivity());
+							if(which == 0) {
+								NetworkUtilities.enableWifi(getActivity());
+								enablingConnection.setMessage(getActivity().getResources().getString(R.string.enabling_wifi));
+							}
+							else if(which == 1) {
+								NetworkUtilities.enableMobileData(getActivity());
+								enablingConnection.setMessage(getActivity().getResources().getString(R.string.enabling_mobile));
+							}
+							enablingConnection.show();
+							
+							for(int i = 1; i < 6; i++) {
+								mHandler.postDelayed(new Runnable() {
+									public void run() {
+										if(NetworkUtilities.isConnectedToInternet(getActivity())) {
+											enablingConnection.dismiss();
+										}
+								    }
+								}, i*2000);
+							}
+							
+							mHandler.postDelayed(new Runnable() {
+								public void run() {
+									if(!NetworkUtilities.isConnectedToInternet(getActivity())) {
+										enablingConnection.dismiss();
+										String toastMessage = getActivity().getResources().getString(R.string.connection_failure) + "\n" + 
+															  getActivity().getResources().getString(R.string.check_network);
+										Toast.makeText(getActivity(), toastMessage, Toast.LENGTH_LONG).show();
+									}
+							    }
+							}, 11000);
+							
+						}
+					};
+					Builder alertDialog = Dialogs.optionDialog(getActivity(), title, options, connect);
+					alertDialog.create().show();
+				}
+			}
+		});
+	}
+	
+	private void showErrorMessage(final Handler mHandler, final TextView allRequired) {
+		allRequired.setAlpha(0f);
+		allRequired.setScaleX(0f);
+		allRequired.setScaleY(0f);
+		allRequired.setVisibility(View.VISIBLE);
+		allRequired.animate()
+				   .scaleX(1f)
+				   .scaleY(1f)
+				   .alpha(1f)
+				   .setDuration(500)
+				   .setListener(new AnimatorListenerAdapter() {
+		                @Override
+		                public void onAnimationEnd(Animator animation) {
+		                	mHandler.postDelayed(new Runnable() {
+								public void run() {
+									allRequired.animate()
+									   .alpha(0f)
+									   .setDuration(200)
+									   .setListener(new AnimatorListenerAdapter() {
+							                @Override
+							                public void onAnimationEnd(Animator animation) {
+							                	allRequired.setVisibility(View.INVISIBLE);
+							                }
+							            });
+							    }
+							}, 3000);
+		                }
+				   });
+	}
 
-	private void initMainFragment(View rootView, int tabId) {
+	private void initMainFragment(View rootView) {
 		TextView fragment_text = (TextView) rootView.findViewById(R.id.section_label);
 		String[] menuItems = getResources().getStringArray(R.array.menu_items);
 		fragment_text.setText(menuItems[tabId-1]);

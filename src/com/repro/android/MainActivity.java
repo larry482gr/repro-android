@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.repro.android.asynctasks.MembersAsyncTask;
 import com.repro.android.asynctasks.NewsAsyncTask;
 import com.repro.android.dialogs.Dialogs;
 import com.repro.android.utilities.Constants;
@@ -38,6 +39,10 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
 	private Context mContext;
 
+	private String TAG = "MainActivity";
+
+	private CharSequence previousActionBarTitle;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,15 +63,20 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	public void onResume() {
 		super.onResume();
 		if(ReproAndroid.prefs.getBoolean(Constants.JUST_LAUNCHED, true)) {
-			preloadArticles();
+			preloadContent();
 			ReproAndroid.prefs.edit().putBoolean(Constants.JUST_LAUNCHED, false).commit();
 		}
 	}
 	
-	private void preloadArticles() {
+	private void preloadContent() {
 		if(NetworkUtilities.isConnectedToInternet(this)) {
+			// Download Latest Articles
 			NewsAsyncTask news = new NewsAsyncTask(this);
 			news.execute(new String[] { "all" });
+			
+			// Download Members
+			MembersAsyncTask members = new MembersAsyncTask(this);
+			members.execute(new String[] { "all" });
 		}
 		else {
 			String title = getResources().getString(R.string.no_connection_msg);
@@ -85,7 +95,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 					
 					mHandler.postDelayed(new Runnable(){
 						public void run() {
-							preloadArticles();
+							preloadContent();
 					    }
 					}, 5000);
 				}
@@ -107,13 +117,14 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	}
 
 	public void onSectionAttached(int number) {
+		previousActionBarTitle = getActionBar().getTitle();
 		String[] menu_items = getResources().getStringArray(R.array.menu_items);
 		mTitle = menu_items[number-1];
 	}
 
 	public void restoreActionBar() {
 		ActionBar actionBar = getActionBar();
-		// actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
 		actionBar.setTitle(mTitle);
 	}
@@ -175,6 +186,5 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 		};
 		Builder alertDialog = Dialogs.optionDialog(mContext, title, options, connect);
 		alertDialog.create().show();
-		
 	}
 }
