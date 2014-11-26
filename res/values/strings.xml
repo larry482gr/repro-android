@@ -68,6 +68,7 @@
 	
 	<!-- URL Image Strings -->
 		<string name="news_images">http://repro.law.auth.gr/resources/images/news/</string>
+		<string name="members_images">http://repro.law.auth.gr/resources/images/members/</string>
 	<!-- URL Image Strings -->
 	
 	<!-- Contact Us -->

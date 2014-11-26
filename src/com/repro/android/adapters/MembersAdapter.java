@@ -5,14 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
@@ -24,10 +22,8 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.repro.android.ArticleFragment;
 import com.repro.android.R;
 import com.repro.android.database.DatabaseConstants;
-import com.repro.android.utilities.HTTPUtilities;
 
 public class MembersAdapter extends CursorAdapter {
 	private static final String TAG = "NewsAdapter";
@@ -35,7 +31,6 @@ public class MembersAdapter extends CursorAdapter {
 	private LayoutInflater inflater;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	// private Cursor articlesCursor;
 
 	public MembersAdapter(Context context, Cursor membersCursor, int flags) {
 		super(context, membersCursor, flags);
@@ -61,11 +56,12 @@ public class MembersAdapter extends CursorAdapter {
 		ViewHolder holder = new ViewHolder();
 		View view = null;
 		
-		view = inflater.inflate(R.layout.article_item, parent, false);
+		view = inflater.inflate(R.layout.member_item, parent, false);
 		holder = new ViewHolder();
-		holder.articleImage = (ImageView) view.findViewById(R.id.article_image);
-		holder.articleTitle = (TextView) view.findViewById(R.id.article_title);
-		holder.articleShortDesc = (TextView) view.findViewById(R.id.article_short_desc);
+		holder.memberImage = (ImageView) view.findViewById(R.id.member_image);
+		holder.memberName = (TextView) view.findViewById(R.id.member_name);
+		holder.memberCV = (TextView) view.findViewById(R.id.member_cv);
+		holder.memberEmail = (TextView) view.findViewById(R.id.member_email);
 		
 		view.setTag(holder);
 		
@@ -76,16 +72,20 @@ public class MembersAdapter extends CursorAdapter {
 	public void bindView(final View view, Context context, Cursor cursor) {
 		ViewHolder holder = (ViewHolder) view.getTag();
 		
-		final int articleId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants._ID));
+		final int memberId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants._ID));
 		String image = cursor.getString(cursor.getColumnIndex(DatabaseConstants.PICTURE));
-		String imageUri = mContext.getResources().getString(R.string.news_images) + image;
-		Log.i(TAG, "Article title: " + cursor.getString(cursor.getColumnIndex(DatabaseConstants.TITLE)));
-		Log.i(TAG, "Article image: " + imageUri);
+		String imageUri = mContext.getResources().getString(R.string.members_images) + image;
+		Log.i(TAG, "Member name: " + cursor.getString(cursor.getColumnIndex(DatabaseConstants.NAME)));
+		Log.i(TAG, "Member image: " + imageUri);
 		
-		holder.articleTitle.setText(cursor.getString(cursor.getColumnIndex(DatabaseConstants.TITLE)));
-		holder.articleShortDesc.setText(HTTPUtilities.stripHtml(cursor.getString(cursor.getColumnIndex(DatabaseConstants.SHORT_DESC))));
-		ImageLoader.getInstance().displayImage(imageUri, holder.articleImage, options, animateFirstListener);
+		holder.memberName.setText(cursor.getString(cursor.getColumnIndex(DatabaseConstants.NAME)));
+		/* Implement appropriate listeners for CV and contact.
+			holder.memberCV.setOnClickListener(null);
+			holder.memberEmail.setOnClickListener(null);
+		*/
+		ImageLoader.getInstance().displayImage(imageUri, holder.memberImage, options, animateFirstListener);
 		
+		/*
 		holder.articleClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -96,19 +96,18 @@ public class MembersAdapter extends CursorAdapter {
 					.replace(R.id.container, ArticleFragment.newInstance(articleId))
 					.addToBackStack(null)
 					.commit();
-				
-				// Toast.makeText(mContext, Long.toString(articleId), Toast.LENGTH_SHORT).show();
 			}
 		};
 		
 		view.setOnClickListener(holder.articleClick);
+		*/
 	}
 	
 	private static class ViewHolder {
 		ImageView memberImage;
 		TextView memberName;
 		TextView memberCV;
-		OnClickListener memberContact;
+		TextView memberEmail;
 	}
 	
 	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {

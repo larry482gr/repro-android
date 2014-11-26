@@ -1915,33 +1915,33 @@ containing a value of this type.
         public static final int check_network=0x7f0b002a;
         public static final int connection_failure=0x7f0b0029;
         public static final int contact=0x7f0b0021;
-        public static final int contact_email=0x7f0b003a;
+        public static final int contact_email=0x7f0b003b;
         /**  URL Image Strings 
  Contact Us 
  URL Image Strings 
  Contact Us 
          */
-        public static final int contact_form=0x7f0b0038;
-        public static final int contact_full_name=0x7f0b0039;
-        public static final int contact_kast_email=0x7f0b0043;
-        public static final int contact_kast_fax=0x7f0b0042;
-        public static final int contact_kast_name=0x7f0b003e;
-        public static final int contact_kast_office=0x7f0b003f;
-        public static final int contact_kast_post=0x7f0b0040;
-        public static final int contact_kast_tel=0x7f0b0041;
-        public static final int contact_message=0x7f0b003c;
+        public static final int contact_form=0x7f0b0039;
+        public static final int contact_full_name=0x7f0b003a;
+        public static final int contact_kast_email=0x7f0b0044;
+        public static final int contact_kast_fax=0x7f0b0043;
+        public static final int contact_kast_name=0x7f0b003f;
+        public static final int contact_kast_office=0x7f0b0040;
+        public static final int contact_kast_post=0x7f0b0041;
+        public static final int contact_kast_tel=0x7f0b0042;
+        public static final int contact_message=0x7f0b003d;
         public static final int contact_script=0x7f0b0030;
-        public static final int contact_subject=0x7f0b003b;
-        public static final int contact_tarl_email=0x7f0b0048;
-        public static final int contact_tarl_name=0x7f0b0044;
-        public static final int contact_tarl_office=0x7f0b0045;
-        public static final int contact_tarl_post=0x7f0b0046;
-        public static final int contact_tarl_tel=0x7f0b0047;
+        public static final int contact_subject=0x7f0b003c;
+        public static final int contact_tarl_email=0x7f0b0049;
+        public static final int contact_tarl_name=0x7f0b0045;
+        public static final int contact_tarl_office=0x7f0b0046;
+        public static final int contact_tarl_post=0x7f0b0047;
+        public static final int contact_tarl_tel=0x7f0b0048;
         /**  Dialogs Strings 
  Dialogs Strings 
          */
         public static final int domain_url=0x7f0b002d;
-        public static final int email_no_connection_msg=0x7f0b003d;
+        public static final int email_no_connection_msg=0x7f0b003e;
         public static final int enable_mobile=0x7f0b0026;
         public static final int enable_wifi=0x7f0b0025;
         public static final int enabling_mobile=0x7f0b0028;
@@ -1962,6 +1962,7 @@ containing a value of this type.
          */
         public static final int lang_select=0x7f0b0016;
         public static final int links=0x7f0b001e;
+        public static final int members_images=0x7f0b0038;
         /**  URL Script Strings 
          */
         public static final int members_script=0x7f0b002e;

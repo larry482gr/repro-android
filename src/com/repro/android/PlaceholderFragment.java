@@ -23,14 +23,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.repro.android.adapters.MembersAdapter;
 import com.repro.android.adapters.NewsAdapter;
 import com.repro.android.asynctasks.SendEmail;
 import com.repro.android.dialogs.Dialogs;
 import com.repro.android.entities.ArticlesModel;
+import com.repro.android.entities.MembersModel;
 import com.repro.android.entities.StaticContent;
 import com.repro.android.utilities.HtmlTagHandler;
 import com.repro.android.utilities.NetworkUtilities;
@@ -139,11 +142,14 @@ public class PlaceholderFragment extends Fragment {
 		
 		mHandler.postDelayed(new Runnable(){
 			public void run() {
-				ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
-				ArticlesModel articlesModel = new ArticlesModel(getActivity());
-				Cursor articlesCursor = articlesModel.findArticles();
-				NewsAdapter mAdapter = new NewsAdapter(getActivity(), articlesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-				newsList.setAdapter(mAdapter);
+				GridView membersGrid = (GridView) rootView.findViewById(R.id.members_grid);
+				MembersModel membersModel = new MembersModel(getActivity());
+				Cursor groups = membersModel.findGroups();
+				Cursor membersCursor = membersModel.findMembers(groups);
+				if(null != membersCursor) {
+					MembersAdapter mAdapter = new MembersAdapter(getActivity(), membersCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+					membersGrid.setAdapter(mAdapter);
+				}
 		    }
 		}, 400);
 	}

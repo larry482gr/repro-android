@@ -35,7 +35,6 @@ public class NewsAdapter extends CursorAdapter {
 	private LayoutInflater inflater;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
-	// private Cursor articlesCursor;
 
 	public NewsAdapter(Context context, Cursor articlesCursor, int flags) {
 		super(context, articlesCursor, flags);
@@ -97,8 +96,6 @@ public class NewsAdapter extends CursorAdapter {
 					.replace(R.id.container, ArticleFragment.newInstance(articleId))
 					.addToBackStack(null)
 					.commit();
-				
-				// Toast.makeText(mContext, Long.toString(articleId), Toast.LENGTH_SHORT).show();
 			}
 		};
 		
