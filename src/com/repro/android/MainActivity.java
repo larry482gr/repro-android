@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.repro.android.asynctasks.MembersAsyncTask;
 import com.repro.android.asynctasks.NewsAsyncTask;
 import com.repro.android.dialogs.Dialogs;
 import com.repro.android.utilities.Constants;
@@ -62,15 +63,20 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	public void onResume() {
 		super.onResume();
 		if(ReproAndroid.prefs.getBoolean(Constants.JUST_LAUNCHED, true)) {
-			preloadArticles();
+			preloadContent();
 			ReproAndroid.prefs.edit().putBoolean(Constants.JUST_LAUNCHED, false).commit();
 		}
 	}
 	
-	private void preloadArticles() {
+	private void preloadContent() {
 		if(NetworkUtilities.isConnectedToInternet(this)) {
+			// Download Latest Articles
 			NewsAsyncTask news = new NewsAsyncTask(this);
 			news.execute(new String[] { "all" });
+			
+			// Download Members
+			MembersAsyncTask members = new MembersAsyncTask(this);
+			members.execute(new String[] { "all" });
 		}
 		else {
 			String title = getResources().getString(R.string.no_connection_msg);
@@ -89,7 +95,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 					
 					mHandler.postDelayed(new Runnable(){
 						public void run() {
-							preloadArticles();
+							preloadContent();
 					    }
 					}, 5000);
 				}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/member_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+    <ImageView 
+        android:id="@+id/member_image"
+        android:layout_width="44dp"
+        android:layout_height="53dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_launcher" />
+    
+
+    <TextView
+        android:id="@+id/member_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/member_image"
+        android:layout_toEndOf="@+id/member_image"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:text="Sample Title"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/member_cv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/member_name"
+        android:layout_alignLeft="@+id/member_name"
+        android:layout_alignStart="@+id/member_name"
+        android:layout_marginBottom="2dp"
+        android:text="CV"
+        android:textSize="10sp" />
+    
+    <TextView
+        android:id="@+id/member_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/member_cv"
+        android:layout_alignLeft="@+id/member_cv"
+        android:layout_alignStart="@+id/member_cv"
+        android:layout_marginBottom="2dp"
+        android:text="Επικοινωνία"
+        android:textSize="10sp" />
+    
+</RelativeLayout>

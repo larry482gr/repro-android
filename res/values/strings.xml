@@ -49,6 +49,7 @@
 	
 	<string name="domain_url">http://repro.law.auth.gr/api/</string>
 	<!-- URL Script Strings -->
+		<string name="members_script">members.php?</string>
 		<string name="news_script">news.php?</string>
 		<string name="contact_script">contact.php?</string>
 	<!-- URL Script Strings -->

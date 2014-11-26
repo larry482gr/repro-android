@@ -54,7 +54,6 @@ public class ArticlesModel {
 	}
 	
 	public long createArticle(JSONObject article) {
-		// SQLiteDatabase db = dbHandler.getDb();
 		ContentValues values = new ContentValues();
 		
 		try {

@@ -90,6 +90,9 @@ public class PlaceholderFragment extends Fragment {
 	private int getFragment(int tabId) {
 		int fragmentId = -1;
 		switch(tabId) {
+			case 1:
+				fragmentId = R.layout.fragment_members;
+				break;
 			case 2:
 				fragmentId = R.layout.fragment_research_program;
 				break;
@@ -109,6 +112,9 @@ public class PlaceholderFragment extends Fragment {
 	
 	private void initView(View rootView, int tabId) {
 		switch(tabId) {
+			case 1:
+				initMembersFragment(rootView);
+				break;
 			case 2:
 				initResearchProgramFragment(rootView);
 				break;
@@ -130,6 +136,21 @@ public class PlaceholderFragment extends Fragment {
 		
 	}
 
+	private void initMembersFragment(final View rootView) {
+		// Implement members GridView adapter.
+		Handler mHandler = new Handler(Looper.getMainLooper());
+		
+		mHandler.postDelayed(new Runnable(){
+			public void run() {
+				ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
+				ArticlesModel articlesModel = new ArticlesModel(getActivity());
+				Cursor articlesCursor = articlesModel.findArticles();
+				NewsAdapter mAdapter = new NewsAdapter(getActivity(), articlesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+				newsList.setAdapter(mAdapter);
+		    }
+		}, 400);
+	}
+	
 	private void initResearchProgramFragment(View rootView) {
 		Configuration config = rootView.getContext().getResources().getConfiguration();
         Locale locale = config.locale;
