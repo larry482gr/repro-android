@@ -7,7 +7,7 @@
 	        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
 	        android:propertyName="X"
 	        android:valueType="floatType"
-	        android:valueFrom="1000"
+	        android:valueFrom="1600"
 	        android:valueTo="0"
 	        android:duration="@android:integer/config_mediumAnimTime" />
 	

@@ -5,12 +5,18 @@
 	<objectAnimator
 	        xmlns:android="http://schemas.android.com/apk/res/android"
 	        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
-	        android:propertyName="x"
+	        android:propertyName="X"
 	        android:valueType="floatType"
 	        android:valueFrom="0"
-	        android:valueTo="1400"
+	        android:valueTo="1600"
 	        android:duration="@android:integer/config_mediumAnimTime" />
 	
-	
+	<objectAnimator
+            android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+            android:propertyName="alpha"
+            android:valueType="floatType"
+            android:valueFrom="1.0"
+            android:valueTo="0"
+            android:duration="@android:integer/config_mediumAnimTime"/>
 	
 </set>
