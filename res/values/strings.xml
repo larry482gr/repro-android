@@ -47,8 +47,8 @@
 	    <string name="cancel">Cancel</string>
 	<!-- Dialogs Strings -->
 	
-	<string name="domain_url">http://repro.law.auth.gr/api/</string>
 	<!-- URL Script Strings -->
+		<string name="domain_url">http://repro.law.auth.gr/api/</string>
 		<string name="members_script">members.php?</string>
 		<string name="news_script">news.php?</string>
 		<string name="contact_script">contact.php?</string>
@@ -70,6 +70,10 @@
 		<string name="news_images">http://repro.law.auth.gr/resources/images/news/</string>
 		<string name="members_images">http://repro.law.auth.gr/resources/images/members/</string>
 	<!-- URL Image Strings -->
+	
+	<!-- Research Members -->
+		<string name="member_contact">Contact</string>
+	<!-- Research Members -->
 	
 	<!-- Contact Us -->
 		<string name="contact_form">Contact Form</string>

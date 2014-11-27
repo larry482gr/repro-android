@@ -1,4 +1,4 @@
-package com.repro.android;
+package com.repro.android.fragments;
 
 import java.util.Locale;
 
@@ -28,6 +28,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.repro.android.MainActivity;
+import com.repro.android.R;
+import com.repro.android.R.array;
+import com.repro.android.R.id;
+import com.repro.android.R.layout;
+import com.repro.android.R.string;
 import com.repro.android.adapters.MembersAdapter;
 import com.repro.android.adapters.NewsAdapter;
 import com.repro.android.asynctasks.SendEmail;
@@ -76,14 +82,9 @@ public class PlaceholderFragment extends Fragment {
 	}
 	
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-	}
-	
-	@Override
-	public void onResume() {
-		super.onResume();
-		initView(getView(), tabId);
+	public void onViewCreated(View rootView, Bundle savedInstanceState) {
+		super.onViewCreated(rootView, savedInstanceState);
+		initView(rootView, tabId);
 		setActionBarTitle();
 	}
 
@@ -138,23 +139,17 @@ public class PlaceholderFragment extends Fragment {
 
 	private void initMembersFragment(final View rootView) {
 		// Implement members GridView adapter.
-		Handler mHandler = new Handler(Looper.getMainLooper());
-		
-		mHandler.postDelayed(new Runnable(){
-			public void run() {
-				GridView membersGrid = (GridView) rootView.findViewById(R.id.members_grid);
-				MembersModel membersModel = new MembersModel(getActivity());
-				Cursor groups = membersModel.findGroups();
-				Cursor membersCursor = membersModel.findMembers(groups);
-				if(null != membersCursor) {
-					MembersAdapter mAdapter = new MembersAdapter(getActivity(), membersCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-					membersGrid.setAdapter(mAdapter);
-				}
-		    }
-		}, 400);
+		GridView membersGrid = (GridView) rootView.findViewById(R.id.members_grid);
+		MembersModel membersModel = new MembersModel(getActivity());
+		Cursor groups = membersModel.findGroups();
+		Cursor membersCursor = membersModel.findMembers(groups);
+		if(null != membersCursor) {
+			MembersAdapter mAdapter = new MembersAdapter(getActivity(), membersCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+			membersGrid.setAdapter(mAdapter);
+		}
 	}
 	
-	private void initResearchProgramFragment(View rootView) {
+	private void initResearchProgramFragment(final View rootView) {
 		Configuration config = rootView.getContext().getResources().getConfiguration();
         Locale locale = config.locale;
         
@@ -170,17 +165,11 @@ public class PlaceholderFragment extends Fragment {
 	}
 	
 	private void initNewsFragment(final View rootView) {
-		Handler mHandler = new Handler(Looper.getMainLooper());
-		
-		mHandler.postDelayed(new Runnable(){
-			public void run() {
-				ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
-				ArticlesModel articlesModel = new ArticlesModel(getActivity());
-				Cursor articlesCursor = articlesModel.findArticles();
-				NewsAdapter mAdapter = new NewsAdapter(getActivity(), articlesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-				newsList.setAdapter(mAdapter);
-		    }
-		}, 400);
+		ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
+		ArticlesModel articlesModel = new ArticlesModel(getActivity());
+		Cursor articlesCursor = articlesModel.findArticles();
+		NewsAdapter mAdapter = new NewsAdapter(getActivity(), articlesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+		newsList.setAdapter(mAdapter);
 	}
 	
 	private void initContactFragment(View rootView) {
@@ -209,9 +198,9 @@ public class PlaceholderFragment extends Fragment {
 				final Handler mHandler = new Handler(Looper.getMainLooper());
 				
 				if(NetworkUtilities.isConnectedToInternet(getActivity())) {
-					String[] contactParams = new String[] { fullNameInput.getText().toString().trim(), 
-															emailInput.getText().toString().trim(), 
-															subjectInput.getText().toString().trim(), 
+					String[] contactParams = new String[] { fullNameInput.getText().toString().trim(),
+															emailInput.getText().toString().trim(),
+															subjectInput.getText().toString().trim(),
 															messageInput.getText().toString().trim(),
 															"0" };
 					

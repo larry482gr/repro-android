@@ -1,9 +1,5 @@
 package com.repro.android.adapters;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -21,19 +17,16 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.repro.android.ArticleFragment;
 import com.repro.android.R;
 import com.repro.android.database.DatabaseConstants;
+import com.repro.android.fragments.ArticleFragment;
 import com.repro.android.utilities.HTTPUtilities;
+import com.repro.android.utilities.ImageUtilities;
 
 public class NewsAdapter extends CursorAdapter {
 	private static final String TAG = "NewsAdapter";
 	private Activity mContext;
 	private LayoutInflater inflater;
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private DisplayImageOptions options;
 
 	public NewsAdapter(Context context, Cursor articlesCursor, int flags) {
@@ -83,7 +76,7 @@ public class NewsAdapter extends CursorAdapter {
 		
 		holder.articleTitle.setText(cursor.getString(cursor.getColumnIndex(DatabaseConstants.TITLE)));
 		holder.articleShortDesc.setText(HTTPUtilities.stripHtml(cursor.getString(cursor.getColumnIndex(DatabaseConstants.SHORT_DESC))));
-		ImageLoader.getInstance().displayImage(imageUri, holder.articleImage, options, animateFirstListener);
+		ImageLoader.getInstance().displayImage(imageUri, holder.articleImage, options, ImageUtilities.getAnimateFirstDisplayListenerInstance());
 		
 		holder.articleClick = new OnClickListener() {
 			@Override
@@ -107,20 +100,5 @@ public class NewsAdapter extends CursorAdapter {
 		TextView articleTitle;
 		TextView articleShortDesc;
 		OnClickListener articleClick;
-	}
-	
-	private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
-		static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
-		@Override
-		public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-			if (loadedImage != null) {
-				ImageView imageView = (ImageView) view;
-				boolean firstDisplay = !displayedImages.contains(imageUri);
-				if (firstDisplay) {
-					FadeInBitmapDisplayer.animate(imageView, 800);
-					displayedImages.add(imageUri);
-				}
-			}
-		}
 	}
 }

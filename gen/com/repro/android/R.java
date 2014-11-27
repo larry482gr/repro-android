@@ -1673,13 +1673,13 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0a0021;
         public static final int action_bar_title=0x7f0a0020;
         public static final int action_context_bar=0x7f0a0034;
-        public static final int action_language=0x7f0a0071;
+        public static final int action_language=0x7f0a0075;
         public static final int action_menu_divider=0x7f0a0005;
         public static final int action_menu_presenter=0x7f0a0006;
         public static final int action_mode_bar=0x7f0a0030;
         public static final int action_mode_bar_stub=0x7f0a002f;
         public static final int action_mode_close_button=0x7f0a0022;
-        public static final int action_settings=0x7f0a0070;
+        public static final int action_settings=0x7f0a0074;
         public static final int activity_chooser_view_content=0x7f0a0023;
         public static final int all_required=0x7f0a0058;
         public static final int always=0x7f0a0014;
@@ -1733,10 +1733,14 @@ containing a value of this type.
         public static final int image=0x7f0a0025;
         public static final int listMode=0x7f0a000a;
         public static final int list_item=0x7f0a0027;
-        public static final int member_cv=0x7f0a006e;
-        public static final int member_email=0x7f0a006f;
+        public static final int member_cv_scrollview=0x7f0a0072;
         public static final int member_image=0x7f0a006c;
         public static final int member_item=0x7f0a006b;
+        public static final int member_layout=0x7f0a006e;
+        public static final int member_layout_contact=0x7f0a0071;
+        public static final int member_layout_cv=0x7f0a0073;
+        public static final int member_layout_image=0x7f0a006f;
+        public static final int member_layout_name=0x7f0a0070;
         public static final int member_name=0x7f0a006d;
         public static final int members_grid=0x7f0a0067;
         public static final int message_input=0x7f0a0057;
@@ -1839,7 +1843,8 @@ containing a value of this type.
         public static final int fragment_news_list=0x7f03001e;
         public static final int fragment_research_program=0x7f03001f;
         public static final int member_item=0x7f030020;
-        public static final int support_simple_spinner_dropdown_item=0x7f030021;
+        public static final int member_layout=0x7f030021;
+        public static final int support_simple_spinner_dropdown_item=0x7f030022;
     }
     public static final class menu {
         public static final int global=0x7f0e0000;
@@ -1915,41 +1920,39 @@ containing a value of this type.
         public static final int check_network=0x7f0b002a;
         public static final int connection_failure=0x7f0b0029;
         public static final int contact=0x7f0b0021;
-        public static final int contact_email=0x7f0b003b;
-        /**  URL Image Strings 
+        public static final int contact_email=0x7f0b003c;
+        /**  Research Members 
  Contact Us 
- URL Image Strings 
+ Research Members 
  Contact Us 
          */
-        public static final int contact_form=0x7f0b0039;
-        public static final int contact_full_name=0x7f0b003a;
-        public static final int contact_kast_email=0x7f0b0044;
-        public static final int contact_kast_fax=0x7f0b0043;
-        public static final int contact_kast_name=0x7f0b003f;
-        public static final int contact_kast_office=0x7f0b0040;
-        public static final int contact_kast_post=0x7f0b0041;
-        public static final int contact_kast_tel=0x7f0b0042;
-        public static final int contact_message=0x7f0b003d;
+        public static final int contact_form=0x7f0b003a;
+        public static final int contact_full_name=0x7f0b003b;
+        public static final int contact_kast_email=0x7f0b0045;
+        public static final int contact_kast_fax=0x7f0b0044;
+        public static final int contact_kast_name=0x7f0b0040;
+        public static final int contact_kast_office=0x7f0b0041;
+        public static final int contact_kast_post=0x7f0b0042;
+        public static final int contact_kast_tel=0x7f0b0043;
+        public static final int contact_message=0x7f0b003e;
         public static final int contact_script=0x7f0b0030;
-        public static final int contact_subject=0x7f0b003c;
-        public static final int contact_tarl_email=0x7f0b0049;
-        public static final int contact_tarl_name=0x7f0b0045;
-        public static final int contact_tarl_office=0x7f0b0046;
-        public static final int contact_tarl_post=0x7f0b0047;
-        public static final int contact_tarl_tel=0x7f0b0048;
+        public static final int contact_subject=0x7f0b003d;
+        public static final int contact_tarl_email=0x7f0b004a;
+        public static final int contact_tarl_name=0x7f0b0046;
+        public static final int contact_tarl_office=0x7f0b0047;
+        public static final int contact_tarl_post=0x7f0b0048;
+        public static final int contact_tarl_tel=0x7f0b0049;
         /**  Dialogs Strings 
- Dialogs Strings 
+ URL Script Strings 
          */
         public static final int domain_url=0x7f0b002d;
-        public static final int email_no_connection_msg=0x7f0b003e;
+        public static final int email_no_connection_msg=0x7f0b003f;
         public static final int enable_mobile=0x7f0b0026;
         public static final int enable_wifi=0x7f0b0025;
         public static final int enabling_mobile=0x7f0b0028;
         public static final int enabling_wifi=0x7f0b0027;
         public static final int events=0x7f0b001d;
         /**  URL Params Strings 
- URL Action Strings 
- URL Params Strings 
  URL Action Strings 
          */
         public static final int find_all=0x7f0b0035;
@@ -1962,22 +1965,22 @@ containing a value of this type.
          */
         public static final int lang_select=0x7f0b0016;
         public static final int links=0x7f0b001e;
-        public static final int members_images=0x7f0b0038;
-        /**  URL Script Strings 
+        /**  URL Image Strings 
+ Research Members 
+ Dialogs Strings 
+ Research Members 
          */
+        public static final int member_contact=0x7f0b0039;
+        public static final int members_images=0x7f0b0038;
         public static final int members_script=0x7f0b002e;
         public static final int navigation_drawer_close=0x7f0b0012;
         public static final int navigation_drawer_open=0x7f0b0011;
         public static final int news=0x7f0b001c;
         /**  URL Action Strings 
  URL Image Strings 
- URL Action Strings 
- URL Image Strings 
          */
         public static final int news_images=0x7f0b0037;
         public static final int news_no_connection_msg=0x7f0b0024;
-        /**  URL Script Strings 
-         */
         public static final int news_script=0x7f0b002f;
         /**  Button Strings 
  Dialogs Strings 
@@ -1990,8 +1993,6 @@ containing a value of this type.
         public static final int param_id=0x7f0b0034;
         public static final int param_operator=0x7f0b0032;
         /**  URL Script Strings 
- URL Params Strings 
- URL Script Strings 
  URL Params Strings 
          */
         public static final int param_separator=0x7f0b0031;

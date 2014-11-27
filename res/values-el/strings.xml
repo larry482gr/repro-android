@@ -46,26 +46,9 @@
 	    <string name="cancel">Άκυρο</string>
 	<!-- Dialogs Strings -->
 	
-	<string name="domain_url">http://repro.law.auth.gr/api/</string>
-	<!-- URL Script Strings -->
-		<string name="news_script">news.php?</string>
-	<!-- URL Script Strings -->
-		
-	<!-- URL Params Strings -->
-		<string name="param_separator">&amp;</string>
-		<string name="param_operator">=</string>
-		<string name="param_action">action</string>
-		<string name="param_id">id</string>
-	<!-- URL Params Strings -->
-
-	<!-- URL Action Strings -->
-		<string name="find_all">all</string>
-		<string name="find_one">one</string>
-	<!-- URL Action Strings -->
-	
-	<!-- URL Image Strings -->
-		<string name="news_images">http://repro.law.auth.gr/resources/images/news/</string>
-	<!-- URL Image Strings -->
+	<!-- Research Members -->
+		<string name="member_contact">Επικοινωνία</string>
+	<!-- Research Members -->
 	
 	<!-- Contact Us -->
 		<string name="contact_form">Φόρμα Επικοινωνίας</string>

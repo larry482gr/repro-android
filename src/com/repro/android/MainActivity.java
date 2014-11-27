@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -16,10 +17,13 @@ import android.os.Looper;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.repro.android.asynctasks.MembersAsyncTask;
 import com.repro.android.asynctasks.NewsAsyncTask;
 import com.repro.android.dialogs.Dialogs;
+import com.repro.android.fragments.NavigationDrawerFragment;
+import com.repro.android.fragments.PlaceholderFragment;
 import com.repro.android.utilities.Constants;
 import com.repro.android.utilities.NetworkUtilities;
 
@@ -79,25 +83,46 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			members.execute(new String[] { "all" });
 		}
 		else {
+			final Handler mHandler = new Handler(Looper.getMainLooper());
+			
 			String title = getResources().getString(R.string.no_connection_msg);
 			String[] options = new String[] { getResources().getString(R.string.enable_wifi), getResources().getString(R.string.enable_mobile) };
 			OnClickListener connect = new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					final ProgressDialog enablingConnection = new ProgressDialog(mContext);
 					if(which == 0) {
 						NetworkUtilities.enableWifi(mContext);
+						enablingConnection.setMessage(mContext.getResources().getString(R.string.enabling_wifi));
 					}
 					else if(which == 1) {
 						NetworkUtilities.enableMobileData(mContext);
+						enablingConnection.setMessage(mContext.getResources().getString(R.string.enabling_mobile));
+					}
+					enablingConnection.show();
+					
+					for(int i = 1; i < 6; i++) {
+						mHandler.postDelayed(new Runnable() {
+							public void run() {
+								if(NetworkUtilities.isConnectedToInternet(mContext)) {
+									enablingConnection.dismiss();
+									preloadContent();
+								}
+						    }
+						}, i*2000);
 					}
 					
-					Handler mHandler = new Handler(Looper.getMainLooper());
-					
-					mHandler.postDelayed(new Runnable(){
+					mHandler.postDelayed(new Runnable() {
 						public void run() {
-							preloadContent();
+							if(!NetworkUtilities.isConnectedToInternet(mContext)) {
+								enablingConnection.dismiss();
+								String toastMessage = mContext.getResources().getString(R.string.connection_failure) + "\n" + 
+													mContext.getResources().getString(R.string.check_network);
+								Toast.makeText(mContext, toastMessage, Toast.LENGTH_LONG).show();
+							}
 					    }
-					}, 5000);
+					}, 11000);
+					
 				}
 			};
 			Builder alertDialog = Dialogs.optionDialog(mContext, title, options, connect);

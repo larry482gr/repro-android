@@ -21,6 +21,28 @@ public class MembersModel {
 	public MembersModel(Context context) {
 		this.db = DatabaseSingleton.getInstance(context).getDb();
 	}
+	
+	public int getLastId(String table) {
+		String[] columns = new String[] { DatabaseConstants.REMOTE_ID };
+		String order = DatabaseConstants.REMOTE_ID + " DESC";
+		String limit = "LIMIT 0, 1";
+		int lastId = 0;
+		
+		Cursor cursor = db.query(table, columns, null, null, null, null, order + " " + limit);
+		if(cursor.moveToFirst()) {
+			lastId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.REMOTE_ID));
+		}
+		
+		return lastId;
+	}
+	
+	public int getGroupsLastId() {
+		return getLastId(DatabaseConstants.TABLE_GROUPS);
+	}
+	
+	public int getMembersLastId() {
+		return getLastId(DatabaseConstants.TABLE_MEMBERS);
+	}
 
 	public long createGroup(JSONObject group) {
 		ContentValues values = new ContentValues();

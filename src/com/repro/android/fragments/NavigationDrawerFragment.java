@@ -1,4 +1,11 @@
-package com.repro.android;
+package com.repro.android.fragments;
+
+import com.repro.android.R;
+import com.repro.android.R.array;
+import com.repro.android.R.drawable;
+import com.repro.android.R.layout;
+import com.repro.android.R.menu;
+import com.repro.android.R.string;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -6,6 +13,8 @@ import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -51,7 +60,7 @@ public class NavigationDrawerFragment extends Fragment {
 	 */
 	private ActionBarDrawerToggle mDrawerToggle;
 
-	private DrawerLayout mDrawerLayout;
+	private static DrawerLayout mDrawerLayout;
 	private ListView mDrawerListView;
 	private View mFragmentContainerView;
 
@@ -211,7 +220,7 @@ public class NavigationDrawerFragment extends Fragment {
 			mCallbacks.onNavigationDrawerItemSelected(position);
 		}
 	}
-
+	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);

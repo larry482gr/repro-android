@@ -44,13 +44,17 @@ public class MembersAsyncTask extends HttpTextAsyncTask {
 		String action = params[0];
 		
 		String url = super.domain_url + members_url;
-		Log.i(TAG, "URL: " + url);
 		
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(url);
 		try {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("action", action));
+			
+			int groupLastId = membersModel.getGroupsLastId();
+			int memberLastId = membersModel.getMembersLastId();
+			nameValuePairs.add(new BasicNameValuePair("groups_last_id", Integer.toString(groupLastId)));
+			nameValuePairs.add(new BasicNameValuePair("members_last_id", Integer.toString(memberLastId)));
 			
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -97,12 +101,13 @@ public class MembersAsyncTask extends HttpTextAsyncTask {
 			Log.d(TAG, e.getLocalizedMessage());
 		}
 		
-		Log.d(TAG, "Groups\n" + groups.toString());
-		Log.d(TAG, "Members\n" + members.toString());
+		// Log.d(TAG, "Groups\n" + groups.toString());
+		// Log.d(TAG, "Members\n" + members.toString());
 		
 		createGroups(groups);
 		createMembers(members);
 		
+		/*
 		Cursor groupsCursor	= membersModel.findGroups();
 		Cursor membersCursor = membersModel.findMembers(groupsCursor);
 		
@@ -117,6 +122,7 @@ public class MembersAsyncTask extends HttpTextAsyncTask {
 				Log.d(TAG, "============NEW MEMBER END============");
 			} while(membersCursor.moveToNext());
 		}
+		*/
 	}
 
 	private void createGroups(JSONArray groups) {
