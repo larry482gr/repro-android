@@ -17,9 +17,9 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.repro.android.ArticleFragment;
 import com.repro.android.R;
 import com.repro.android.database.DatabaseConstants;
-import com.repro.android.fragments.ArticleFragment;
 import com.repro.android.utilities.HTTPUtilities;
 import com.repro.android.utilities.ImageUtilities;
 

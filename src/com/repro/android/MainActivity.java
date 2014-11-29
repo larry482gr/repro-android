@@ -4,9 +4,9 @@ import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -15,15 +15,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.repro.android.asynctasks.MembersAsyncTask;
 import com.repro.android.asynctasks.NewsAsyncTask;
 import com.repro.android.dialogs.Dialogs;
-import com.repro.android.fragments.NavigationDrawerFragment;
-import com.repro.android.fragments.PlaceholderFragment;
 import com.repro.android.utilities.Constants;
 import com.repro.android.utilities.NetworkUtilities;
 
@@ -45,8 +45,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
 	private String TAG = "MainActivity";
 
-	private CharSequence previousActionBarTitle;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,11 +59,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		
 		mContext = this;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
+		
 		if(ReproAndroid.prefs.getBoolean(Constants.JUST_LAUNCHED, true)) {
 			preloadContent();
 			ReproAndroid.prefs.edit().putBoolean(Constants.JUST_LAUNCHED, false).commit();
@@ -133,16 +127,17 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager
-			.beginTransaction()
-			.replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-			.addToBackStack(null)
-			.commit();
+		if(position != PlaceholderFragment.getTabId() - 1) {
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager
+				.beginTransaction()
+				.replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+				.addToBackStack(null)
+				.commit();
+		}
 	}
 
 	public void onSectionAttached(int number) {
-		previousActionBarTitle = getActionBar().getTitle();
 		String[] menu_items = getResources().getStringArray(R.array.menu_items);
 		mTitle = menu_items[number-1];
 	}
@@ -183,6 +178,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 	}
 
 	private void showLanguageAlert() {
+		// Log.d(TAG, "Tab id: " + PlaceholderFragment.getTabId());
 		String title = getResources().getString(R.string.lang_select);
 		String[] options = getResources().getStringArray(R.array.language_items);
 		OnClickListener connect = new OnClickListener() {
@@ -206,10 +202,24 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 				ReproAndroid.prefs.edit().putString(Constants.LOCALE, locale.toString()).commit();
 				ReproAndroid.prefs.edit().putString(Constants.LANGUAGE_ID, langId).commit();
 				
-				recreate();
+				int currentTabId = PlaceholderFragment.getTabId();
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.popBackStackImmediate();
+				
+				ListView navigationDrawerList = mNavigationDrawerFragment.getNavigationListView();
+				mNavigationDrawerFragment.setListAdapter(navigationDrawerList);
+				mNavigationDrawerFragment.selectItem(currentTabId-1);
+				invalidateOptionsMenu();
 			}
 		};
 		Builder alertDialog = Dialogs.optionDialog(mContext, title, options, connect);
 		alertDialog.create().show();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		int currentTabId = PlaceholderFragment.getTabId();
+		mNavigationDrawerFragment.setItemChecked(currentTabId-1);
 	}
 }

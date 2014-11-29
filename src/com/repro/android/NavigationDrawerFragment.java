@@ -1,11 +1,4 @@
-package com.repro.android.fragments;
-
-import com.repro.android.R;
-import com.repro.android.R.array;
-import com.repro.android.R.drawable;
-import com.repro.android.R.layout;
-import com.repro.android.R.menu;
-import com.repro.android.R.string;
+package com.repro.android;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -13,12 +6,11 @@ import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +20,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.repro.android.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation
@@ -38,6 +31,7 @@ import android.widget.Toast;
  * implemented here.
  */
 public class NavigationDrawerFragment extends Fragment {
+	private final static String TAG = "NavigationDrawerFragment";
 
 	/**
 	 * Remember the position of the selected item.
@@ -113,12 +107,16 @@ public class NavigationDrawerFragment extends Fragment {
 						selectItem(position);
 					}
 				});
-		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
+		setListAdapter(mDrawerListView);
+		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+		return mDrawerListView;
+	}
+
+	public void setListAdapter(ListView navigationDrawerList) {
+		navigationDrawerList.setAdapter(new ArrayAdapter<String>(getActionBar()
 				.getThemedContext(),
 				android.R.layout.simple_list_item_activated_1,
 				android.R.id.text1, getResources().getStringArray(R.array.menu_items)));
-		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-		return mDrawerListView;
 	}
 
 	public boolean isDrawerOpen() {
@@ -208,17 +206,29 @@ public class NavigationDrawerFragment extends Fragment {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
 
-	private void selectItem(int position) {
-		mCurrentSelectedPosition = position;
-		if (mDrawerListView != null) {
-			mDrawerListView.setItemChecked(position, true);
-		}
+	public void selectItem(int position) {
+		setItemChecked(position);
 		if (mDrawerLayout != null) {
-			mDrawerLayout.closeDrawer(mFragmentContainerView);
+			try {
+				mDrawerLayout.closeDrawer(mFragmentContainerView);
+			} catch(NullPointerException e) {
+				Log.d(TAG, "mFragmentContainerView null pointer exception.");
+			}
 		}
 		if (mCallbacks != null) {
 			mCallbacks.onNavigationDrawerItemSelected(position);
 		}
+	}
+	
+	public void setItemChecked(int position) {
+		mCurrentSelectedPosition = position;
+		if (mDrawerListView != null) {
+			mDrawerListView.setItemChecked(position, true);
+		}
+	}
+	
+	public ListView getNavigationListView() {
+		return mDrawerListView;
 	}
 	
 	@Override
