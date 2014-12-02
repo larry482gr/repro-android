@@ -18,6 +18,7 @@ public class ReproAndroid extends Application {
 	private final String TAG = "ReproAndroid";
 	public static SharedPreferences prefs;
 	
+	@Override
 	public void onCreate() {
 		super.onCreate();
 		initImageLoader(getApplicationContext());
