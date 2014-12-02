@@ -1,4 +1,4 @@
-package com.repro.android.fragments;
+package com.repro.android;
 
 import android.app.Fragment;
 import android.database.Cursor;

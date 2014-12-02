@@ -29,10 +29,12 @@ public class ReproAndroid extends Application {
 		Locale locale = null;
 		if(language.equals("en")) {
 			locale = Locale.ENGLISH;
+			prefs.edit().putString(Constants.LOCALE, locale.toString()).commit();
 			prefs.edit().putString(Constants.LANGUAGE_ID, Constants.ENGLISH_ID).commit();
 		}
 		else {
 			locale = Locale.getDefault();
+			prefs.edit().putString(Constants.LOCALE, locale.toString()).commit();
 			prefs.edit().putString(Constants.LANGUAGE_ID, Constants.GREEK_ID).commit();
 		}
 		config.locale = locale;

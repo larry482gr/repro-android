@@ -1,4 +1,4 @@
-package com.repro.android.fragments;
+package com.repro.android;
 
 import java.util.Locale;
 
@@ -28,12 +28,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.repro.android.MainActivity;
-import com.repro.android.R;
-import com.repro.android.R.array;
-import com.repro.android.R.id;
-import com.repro.android.R.layout;
-import com.repro.android.R.string;
 import com.repro.android.adapters.MembersAdapter;
 import com.repro.android.adapters.NewsAdapter;
 import com.repro.android.asynctasks.SendEmail;
@@ -48,6 +42,8 @@ import com.repro.android.utilities.NetworkUtilities;
  * A placeholder fragment containing a simple view.
  */
 public class PlaceholderFragment extends Fragment {
+	private String TAG = "PlaceholderFragment";
+	
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
@@ -67,8 +63,6 @@ public class PlaceholderFragment extends Fragment {
 		return fragment;
 	}
 
-	private String TAG = "PlaceholderFragment";
-
 	public PlaceholderFragment() {
 	}
 
@@ -81,11 +75,22 @@ public class PlaceholderFragment extends Fragment {
 		return rootView;
 	}
 	
+	public static int getTabId() {
+		return tabId;
+	}
+	
 	@Override
 	public void onViewCreated(View rootView, Bundle savedInstanceState) {
 		super.onViewCreated(rootView, savedInstanceState);
 		initView(rootView, tabId);
 		setActionBarTitle();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		// initView(getView(), tabId);
+		// setActionBarTitle();
 	}
 
 	private int getFragment(int tabId) {
@@ -138,38 +143,59 @@ public class PlaceholderFragment extends Fragment {
 	}
 
 	private void initMembersFragment(final View rootView) {
-		// Implement members GridView adapter.
-		GridView membersGrid = (GridView) rootView.findViewById(R.id.members_grid);
-		MembersModel membersModel = new MembersModel(getActivity());
-		Cursor groups = membersModel.findGroups();
-		Cursor membersCursor = membersModel.findMembers(groups);
-		if(null != membersCursor) {
-			MembersAdapter mAdapter = new MembersAdapter(getActivity(), membersCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-			membersGrid.setAdapter(mAdapter);
-		}
+		Handler mHandler = new Handler(getActivity().getMainLooper());
+		
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				// Implement members GridView adapter.
+				GridView membersGrid = (GridView) rootView.findViewById(R.id.members_grid);
+				MembersModel membersModel = new MembersModel(getActivity());
+				Cursor groups = membersModel.findGroups();
+				Cursor membersCursor = membersModel.findMembers(groups);
+				if(null != membersCursor) {
+					MembersAdapter mAdapter = new MembersAdapter(getActivity(), membersCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+					membersGrid.setAdapter(mAdapter);
+				}
+			}
+		}, 340);
 	}
 	
 	private void initResearchProgramFragment(final View rootView) {
-		Configuration config = rootView.getContext().getResources().getConfiguration();
-        Locale locale = config.locale;
-        
-		TextView researchProgram = (TextView) rootView.findViewById(R.id.research_program);
-		HtmlTagHandler htmlTagHandler = new HtmlTagHandler();
+		Handler mHandler = new Handler(getActivity().getMainLooper());
 		
-		if(locale.toString().equals("el_GR")) {
-			researchProgram.setText(Html.fromHtml(StaticContent.RESEARCH_PROGRAM_TITLE_GR + StaticContent.RESEARCH_PROGRAM_CONTENT_GR, null, htmlTagHandler));
-		}
-		else {
-			researchProgram.setText(Html.fromHtml(StaticContent.RESEARCH_PROGRAM_TITLE_EN + StaticContent.RESEARCH_PROGRAM_CONTENT_EN, null, htmlTagHandler));
-		}
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				Configuration config = rootView.getContext().getResources().getConfiguration();
+		        Locale locale = config.locale;
+		        
+				TextView researchProgram = (TextView) rootView.findViewById(R.id.research_program);
+				HtmlTagHandler htmlTagHandler = new HtmlTagHandler();
+				
+				if(locale.toString().equals("el_GR")) {
+					researchProgram.setText(Html.fromHtml(StaticContent.RESEARCH_PROGRAM_TITLE_GR + StaticContent.RESEARCH_PROGRAM_CONTENT_GR, null, htmlTagHandler));
+				}
+				else {
+					researchProgram.setText(Html.fromHtml(StaticContent.RESEARCH_PROGRAM_TITLE_EN + StaticContent.RESEARCH_PROGRAM_CONTENT_EN, null, htmlTagHandler));
+				}
+			}
+		}, 340);
 	}
 	
 	private void initNewsFragment(final View rootView) {
-		ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
-		ArticlesModel articlesModel = new ArticlesModel(getActivity());
-		Cursor articlesCursor = articlesModel.findArticles();
-		NewsAdapter mAdapter = new NewsAdapter(getActivity(), articlesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-		newsList.setAdapter(mAdapter);
+		Handler mHandler = new Handler(getActivity().getMainLooper());
+		
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
+				ArticlesModel articlesModel = new ArticlesModel(getActivity());
+				Cursor articlesCursor = articlesModel.findArticles();
+				NewsAdapter mAdapter = new NewsAdapter(getActivity(), articlesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+				newsList.setAdapter(mAdapter);
+			}
+		}, 340);
 	}
 	
 	private void initContactFragment(View rootView) {
