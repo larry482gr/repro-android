@@ -22,6 +22,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.repro.android.R;
+import com.repro.android.database.DatabaseConstants;
 import com.repro.android.entities.ArticlesModel;
 
 public class NewsAsyncTask extends HttpJsonAsyncTask {
@@ -48,7 +49,7 @@ public class NewsAsyncTask extends HttpJsonAsyncTask {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("action", action));
 			
-			int lastId = articlesModel.getLastId();
+			int lastId = articlesModel.getArticlesLastId();
 			nameValuePairs.add(new BasicNameValuePair("last_id", Integer.toString(lastId)));
 			
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

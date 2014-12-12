@@ -50,6 +50,10 @@
 		<string name="member_contact">Επικοινωνία</string>
 	<!-- Research Members -->
 	
+	<!-- Links -->
+		<string name="link_categories_header">Κατηγορίες Συνδέσμων</string>
+	<!-- Links -->
+	
 	<!-- Contact Us -->
 		<string name="contact_form">Φόρμα Επικοινωνίας</string>
 		<string name="contact_full_name">Ονοματεπώνυμο:</string>

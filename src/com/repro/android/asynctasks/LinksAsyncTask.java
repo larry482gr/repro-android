@@ -23,22 +23,22 @@ import android.content.Context;
 import android.util.Log;
 
 import com.repro.android.R;
-import com.repro.android.entities.MembersModel;
+import com.repro.android.entities.LinksModel;
 
-public class MembersAsyncTask extends HttpTextAsyncTask {
-	private String TAG = MembersAsyncTask.class.getCanonicalName();
-	private MembersModel membersModel;
+public class LinksAsyncTask extends HttpTextAsyncTask {
+	private String TAG = LinksAsyncTask.class.getCanonicalName();
+	private LinksModel linksModel;
 	
-    public MembersAsyncTask(Context context) {
+    public LinksAsyncTask(Context context) {
     	super(context);
-    	membersModel = new MembersModel(mContext);
+    	linksModel = new LinksModel(mContext);
 	}
 
 	@Override
     protected String doInBackground(String... params) {
 		String response = null;
 		
-		String members_url = mContext.getResources().getString(R.string.members_script);
+		String members_url = mContext.getResources().getString(R.string.links_script);
 		String action = params[0];
 		
 		String url = super.domain_url + members_url;
@@ -49,10 +49,10 @@ public class MembersAsyncTask extends HttpTextAsyncTask {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("action", action));
 			
-			int groupLastId = membersModel.getGroupsLastId();
-			int memberLastId = membersModel.getMembersLastId();
-			nameValuePairs.add(new BasicNameValuePair("groups_last_id", Integer.toString(groupLastId)));
-			nameValuePairs.add(new BasicNameValuePair("members_last_id", Integer.toString(memberLastId)));
+			int groupLastId = linksModel.getCategoriesLastId();
+			int memberLastId = linksModel.getLinksLastId();
+			nameValuePairs.add(new BasicNameValuePair("categories_last_id", Integer.toString(groupLastId)));
+			nameValuePairs.add(new BasicNameValuePair("links_last_id", Integer.toString(memberLastId)));
 			
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -83,6 +83,7 @@ public class MembersAsyncTask extends HttpTextAsyncTask {
 	@Override
 	protected void onPostExecute(String response) {
 		Log.i(TAG, response.toString());
+		
 		JSONObject json_response = null;
 		try {
 			json_response = new JSONObject(response);
@@ -90,33 +91,33 @@ public class MembersAsyncTask extends HttpTextAsyncTask {
 			Log.i(TAG, e.getLocalizedMessage());
 		}
 		
-		JSONArray groups = null;
-		JSONArray members = null;
+		JSONArray categories = null;
+		JSONArray links = null;
 		try {
-			groups = json_response.getJSONArray("groups");
-			members = json_response.getJSONArray("members");
+			categories = json_response.getJSONArray("categories");
+			links = json_response.getJSONArray("links");
 		} catch (JSONException e) {
 			Log.d(TAG, e.getLocalizedMessage());
 		}
 		
-		createGroups(groups);
-		createMembers(members);
+		createCategories(categories);
+		createLinks(links);
 	}
 
-	private void createGroups(JSONArray groups) {
-		for (int i = 0; i < groups.length(); i++) {
+	private void createCategories(JSONArray categories) {
+		for (int i = 0; i < categories.length(); i++) {
 			try {
-				membersModel.createGroup(groups.getJSONObject(i));
+				linksModel.createCategory(categories.getJSONObject(i));
 			} catch (JSONException e) {
 				Log.d(TAG, e.getLocalizedMessage());
 			}
 		}
 	}
 
-	private void createMembers(JSONArray members) {
-		for (int i = 0; i < members.length(); i++) {
+	private void createLinks(JSONArray links) {
+		for (int i = 0; i < links.length(); i++) {
 			try {
-				membersModel.createMember(members.getJSONObject(i));
+				linksModel.createLink(links.getJSONObject(i));
 			} catch (JSONException e) {
 				Log.d(TAG, e.getLocalizedMessage());
 			}

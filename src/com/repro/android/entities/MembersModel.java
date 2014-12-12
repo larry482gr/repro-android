@@ -6,38 +6,21 @@ import org.json.JSONObject;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.repro.android.ReproAndroid;
 import com.repro.android.database.DatabaseConstants;
-import com.repro.android.database.DatabaseSingleton;
 import com.repro.android.utilities.Constants;
 
-public class MembersModel {
-	private final static String TAG = "MembersModel";
-	private SQLiteDatabase db;
+public class MembersModel extends Model {
+	private final static String TAG = MembersModel.class.getCanonicalName();
 	
 	public MembersModel(Context context) {
-		this.db = DatabaseSingleton.getInstance(context).getDb();
-	}
-	
-	public int getLastId(String table) {
-		String[] columns = new String[] { DatabaseConstants.REMOTE_ID };
-		String order = DatabaseConstants.REMOTE_ID + " DESC";
-		String limit = "LIMIT 0, 1";
-		int lastId = 0;
-		
-		Cursor cursor = db.query(table, columns, null, null, null, null, order + " " + limit);
-		if(cursor.moveToFirst()) {
-			lastId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.REMOTE_ID));
-		}
-		
-		return lastId;
+		super(context);
 	}
 	
 	public int getGroupsLastId() {
-		return getLastId(DatabaseConstants.TABLE_GROUPS);
+		return getLastId(DatabaseConstants.TABLE_MEMBERS_GROUPS);
 	}
 	
 	public int getMembersLastId() {
@@ -55,7 +38,7 @@ public class MembersModel {
 			Log.d(TAG, e.getLocalizedMessage());
 		}
 		
-		long result = db.insert(DatabaseConstants.TABLE_GROUPS, null, values);
+		long result = db.insert(DatabaseConstants.TABLE_MEMBERS_GROUPS, null, values);
 		Log.i(TAG, "Groups added(label): " + values.getAsString(DatabaseConstants.LABEL));
 		return result;
 	}
@@ -80,47 +63,19 @@ public class MembersModel {
 		return result;
 	}
 	
-	public Cursor findGroups() {
-		String selection = DatabaseConstants.LANG_ID + " = ?";
-		String[] selectionArgs = new String[] { ReproAndroid.prefs.getString(Constants.LANGUAGE_ID, "1") }; 
-		String order = DatabaseConstants.REMOTE_ID + " ASC";
-		Cursor cursor = db.query(DatabaseConstants.TABLE_GROUPS, null, selection, selectionArgs, null, null, order);
-		
-		return cursor;
+	public Cursor findAllMembersGroups() {
+		return findAll(DatabaseConstants.TABLE_MEMBERS_GROUPS, "ASC");
 	}
 	
-	public Cursor findGroup(int groupId) {
-		String selection = DatabaseConstants._ID + " = ?";
-		String[] selectionArgs = new String[] { Integer.toString(groupId) };
-		Cursor cursor = db.query(DatabaseConstants.TABLE_GROUPS, null, selection, selectionArgs, null, null, null);
-		
-		return cursor;
+	public Cursor findMembersGroup(int groupId) {
+		return find(DatabaseConstants.TABLE_MEMBERS_GROUPS, groupId);
 	}
 	
-	public Cursor findMembers(Cursor groups) {
-		Cursor members = null;
-		
-		if(groups.moveToFirst()) {
-			String groupIds = "";
-			
-			do {
-				groupIds = groupIds.concat(groups.getString(groups.getColumnIndex(DatabaseConstants.REMOTE_ID)) + ",");
-			} while(groups.moveToNext());
-			
-			groupIds = groupIds.substring(0, groupIds.length()-1);
-			String selection = DatabaseConstants.GROUP_ID + " IN (" + groupIds + ")";
-			String order = DatabaseConstants.REMOTE_ID + " ASC";
-			members = db.query(DatabaseConstants.TABLE_MEMBERS, null, selection, null, null, null, order);
-		}
-		
-		return members;
+	public Cursor findAllMembers(Cursor groups) {
+		return findAllIn(groups, DatabaseConstants.GROUP_ID, DatabaseConstants.TABLE_MEMBERS, "ASC");
 	}
 	
 	public Cursor findMember(int memberId) {
-		String selection = DatabaseConstants._ID + " = ?";
-		String[] selectionArgs = new String[] { Integer.toString(memberId) };
-		Cursor cursor = db.query(DatabaseConstants.TABLE_MEMBERS, null, selection, selectionArgs, null, null, null);
-		
-		return cursor;
+		return find(DatabaseConstants.TABLE_MEMBERS, memberId);
 	}
 }

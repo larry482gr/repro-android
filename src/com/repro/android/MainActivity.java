@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.repro.android.asynctasks.LinksAsyncTask;
 import com.repro.android.asynctasks.MembersAsyncTask;
 import com.repro.android.asynctasks.NewsAsyncTask;
 import com.repro.android.dialogs.Dialogs;
@@ -43,7 +44,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
 	private Context mContext;
 
-	private String TAG = "MainActivity";
+	private String TAG = MainActivity.class.getCanonicalName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,10 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 			// Download Members
 			MembersAsyncTask members = new MembersAsyncTask(this);
 			members.execute(new String[] { "all" });
+			
+			// Download Links
+			LinksAsyncTask links = new LinksAsyncTask(this);
+			links.execute(new String[] { "all" });
 		}
 		else {
 			final Handler mHandler = new Handler(Looper.getMainLooper());

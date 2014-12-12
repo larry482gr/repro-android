@@ -3,54 +3,30 @@ package com.repro.android.entities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.repro.android.ReproAndroid;
-import com.repro.android.database.DatabaseConstants;
-import com.repro.android.database.DatabaseSingleton;
-import com.repro.android.utilities.Constants;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-public class ArticlesModel {
-	private final static String TAG = "NewsModel";
-	private SQLiteDatabase db;
+import com.repro.android.database.DatabaseConstants;
+
+public class ArticlesModel extends Model {
+	private final static String TAG = ArticlesModel.class.getCanonicalName();
 	
 	public ArticlesModel(Context context) {
-		this.db = DatabaseSingleton.getInstance(context).getDb();
+		super(context);
 	}
 
-	public int getLastId() {
-		String[] columns = new String[] { DatabaseConstants.REMOTE_ID };
-		String order = DatabaseConstants.REMOTE_ID + " DESC";
-		String limit = "LIMIT 0, 1";
-		int lastId = 0;
-		
-		Cursor cursor = db.query(DatabaseConstants.TABLE_NEWS, columns, null, null, null, null, order + " " + limit);
-		if(cursor.moveToFirst()) {
-			lastId = cursor.getInt(cursor.getColumnIndex(DatabaseConstants.REMOTE_ID));
-		}
-		
-		return lastId;
+	public int getArticlesLastId() {
+		return getLastId(DatabaseConstants.TABLE_NEWS);
 	}
 	
-	public Cursor findArticles() {
-		String selection = DatabaseConstants.LANG_ID + " = ?";
-		String[] selectionArgs = new String[] { ReproAndroid.prefs.getString(Constants.LANGUAGE_ID, "1") }; 
-		String order = DatabaseConstants.REMOTE_ID + " DESC";
-		Cursor cursor = db.query(DatabaseConstants.TABLE_NEWS, null, selection, selectionArgs, null, null, order);
-		
-		return cursor;
+	public Cursor findAllArticles() {
+		return findAll(DatabaseConstants.TABLE_NEWS, "DESC");
 	}
 	
 	public Cursor findArticle(int articleId) {
-		String selection = DatabaseConstants._ID + " = ?";
-		String[] selectionArgs = new String[] { Integer.toString(articleId) };
-		Cursor cursor = db.query(DatabaseConstants.TABLE_NEWS, null, selection, selectionArgs, null, null, null);
-		
-		return cursor;
+		return find(DatabaseConstants.TABLE_NEWS, articleId);
 	}
 	
 	public long createArticle(JSONObject article) {

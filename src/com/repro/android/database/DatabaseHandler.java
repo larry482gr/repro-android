@@ -39,8 +39,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DatabaseConstants.CREATE_NEWS_TABLE);
-		db.execSQL(DatabaseConstants.CREATE_GROUPS_TABLE);
+		db.execSQL(DatabaseConstants.CREATE_MEMBERS_GROUPS_TABLE);
 		db.execSQL(DatabaseConstants.CREATE_MEMBERS_TABLE);
+		db.execSQL(DatabaseConstants.CREATE_LINKS_CATEGORIES_TABLE);
+		db.execSQL(DatabaseConstants.CREATE_LINKS_TABLE);
 	}
 
 	/* (non-Javadoc)
@@ -49,8 +51,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_NEWS);
-		db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_GROUPS);
+		db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_MEMBERS_GROUPS);
 		db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_MEMBERS);
+		db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_LINKS_CATEGORIES);
+		db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_LINKS);
 		
 		onCreate(db);
 	}

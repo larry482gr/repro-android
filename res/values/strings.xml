@@ -51,6 +51,7 @@
 		<string name="domain_url">http://repro.law.auth.gr/api/</string>
 		<string name="members_script">members.php?</string>
 		<string name="news_script">news.php?</string>
+		<string name="links_script">links.php?</string>
 		<string name="contact_script">contact.php?</string>
 	<!-- URL Script Strings -->
 		
@@ -74,6 +75,10 @@
 	<!-- Research Members -->
 		<string name="member_contact">Contact</string>
 	<!-- Research Members -->
+	
+	<!-- Links -->
+		<string name="link_categories_header">Link Categories</string>
+	<!-- Links -->
 	
 	<!-- Contact Us -->
 		<string name="contact_form">Contact Form</string>

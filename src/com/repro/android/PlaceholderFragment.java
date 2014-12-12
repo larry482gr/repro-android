@@ -28,11 +28,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.repro.android.adapters.LinkCategoriesAdapter;
 import com.repro.android.adapters.MembersAdapter;
 import com.repro.android.adapters.NewsAdapter;
 import com.repro.android.asynctasks.SendEmail;
 import com.repro.android.dialogs.Dialogs;
 import com.repro.android.entities.ArticlesModel;
+import com.repro.android.entities.LinksModel;
 import com.repro.android.entities.MembersModel;
 import com.repro.android.entities.StaticContent;
 import com.repro.android.utilities.HtmlTagHandler;
@@ -42,7 +44,7 @@ import com.repro.android.utilities.NetworkUtilities;
  * A placeholder fragment containing a simple view.
  */
 public class PlaceholderFragment extends Fragment {
-	private String TAG = "PlaceholderFragment";
+	private String TAG = PlaceholderFragment.class.getCanonicalName();
 	
 	/**
 	 * The fragment argument representing the section number for this
@@ -105,6 +107,9 @@ public class PlaceholderFragment extends Fragment {
 			case 3:
 				fragmentId = R.layout.fragment_news_list;
 				break;
+			case 5:
+				fragmentId = R.layout.fragment_links;
+				break;
 			case 8:
 				fragmentId = R.layout.fragment_contact;
 				break;
@@ -126,6 +131,9 @@ public class PlaceholderFragment extends Fragment {
 				break;
 			case 3:
 				initNewsFragment(rootView);
+				break;
+			case 5:
+				initLinksFragment(rootView);
 				break;
 			case 8:
 				initContactFragment(rootView);
@@ -151,8 +159,8 @@ public class PlaceholderFragment extends Fragment {
 				// Implement members GridView adapter.
 				GridView membersGrid = (GridView) rootView.findViewById(R.id.members_grid);
 				MembersModel membersModel = new MembersModel(getActivity());
-				Cursor groups = membersModel.findGroups();
-				Cursor membersCursor = membersModel.findMembers(groups);
+				Cursor groups = membersModel.findAllMembersGroups();
+				Cursor membersCursor = membersModel.findAllMembers(groups);
 				if(null != membersCursor) {
 					MembersAdapter mAdapter = new MembersAdapter(getActivity(), membersCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 					membersGrid.setAdapter(mAdapter);
@@ -191,9 +199,27 @@ public class PlaceholderFragment extends Fragment {
 			public void run() {
 				ListView newsList = (ListView) rootView.findViewById(R.id.news_list);
 				ArticlesModel articlesModel = new ArticlesModel(getActivity());
-				Cursor articlesCursor = articlesModel.findArticles();
+				Cursor articlesCursor = articlesModel.findAllArticles();
 				NewsAdapter mAdapter = new NewsAdapter(getActivity(), articlesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 				newsList.setAdapter(mAdapter);
+			}
+		}, 340);
+	}
+	
+	private void initLinksFragment(final View rootView) {
+		Handler mHandler = new Handler(getActivity().getMainLooper());
+		
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				TextView linksCategoriesHeader = (TextView) rootView.findViewById(R.id.link_categories_header);
+				linksCategoriesHeader.setText(getResources().getString(R.string.link_categories_header));
+				
+				ListView linksCategoriesList = (ListView) rootView.findViewById(R.id.link_categories_list);
+				LinksModel linksModel = new LinksModel(getActivity());
+				Cursor linkCategoriesCursor = linksModel.findAllLinkCategories();
+				LinkCategoriesAdapter mAdapter = new LinkCategoriesAdapter(getActivity(), linkCategoriesCursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+				linksCategoriesList.setAdapter(mAdapter);
 			}
 		}, 340);
 	}
