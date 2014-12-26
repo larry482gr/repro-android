@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_title">Υποβοηθούμενη Αναπαραγωγή</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_language">Γλωσσα</string>
+    <string name="action_settings">Επιλογές</string>
+    
+    <!-- Language Strings -->
+    	<string name="lang_select">Επιλογή Γλώσσας</string>
+	    <string name="lang_english">Αγγλικά</string>
+	    <string name="lang_greek">Ελληνικά</string>
+	<!-- Language Strings -->
+	
+	<!-- Form Strings -->
+		<string name="all_required">Όλα τα πεδία είναι υποχρεωτικά.</string>
+	<!-- Form Strings -->
+    
+    <!-- Menu Strings -->
+	    <string name="research_team">Επιστημονική Ομάδα</string>
+	    <string name="research_program">Ερευνητικό Πρόγραμμα</string>
+	    <string name="news">Νέα</string>
+	    <string name="events">Εκδηλώσεις</string>
+	    <string name="links">Σύνδεσμοι</string>
+	    <string name="information">Ενημερώσεις</string>
+	    <string name="opinion">Η Γνώμη σας</string>
+	    <string name="contact">Επικοινωνία</string>
+	<!-- Menu Strings -->
+	
+	<!-- Button Strings -->
+		<string name="send_button">Αποστολή</string>
+	<!-- Button Strings -->
+	
+	<!-- Dialogs Strings -->
+		<string name="no_connection_msg">Μία ενεργή σύνδεση απαιτείται για να λάβετε το πιο πρόσφατο περιεχόμενο.</string>
+	    <string name="news_no_connection_msg">Παρακαλώ ενεργομοιήστε μία σύνδεση, προκειμένου να λάβετε τα τελευταία νέα.</string>
+	    <string name="enable_wifi">Ενεργοποίηση Wi-Fi</string>
+	    <string name="enable_mobile">Ενεργοποίηση Δεδομένων</string>
+	    <string name="enabling_wifi">Ενεργοποιείται το Wi-Fi...</string>
+	    <string name="enabling_mobile">Ενεργοποιούνται τα Δεδομένα...</string>
+	    <string name="connection_failure">Αποτυχία σύνδεσης.</string>
+	    <string name="check_network">Παρακαλώ ελέγξτε το δίκτυο σας και δοκιμάστε ξανά.</string>
+		<string name="accept">Ok</string>
+	    <string name="cancel">Άκυρο</string>
+	<!-- Dialogs Strings -->
+	
+	<!-- Research Members -->
+		<string name="member_contact">Επικοινωνία</string>
+	<!-- Research Members -->
+	
+	<!-- Links -->
+		<string name="link_categories_header">Κατηγορίες Συνδέσμων</string>
+	<!-- Links -->
+	
+	<!-- Contact Us -->
+		<string name="contact_form">Φόρμα Επικοινωνίας</string>
+		<string name="contact_full_name">Ονοματεπώνυμο:</string>
+		<string name="contact_subject">Θέμα:</string>
+		<string name="contact_message">Μήνυμα:</string>
+		<string name="email_no_connection_msg">Απαιτείται ενεργή σύνδεση για να στείλετε email.</string>
+		<string name="contact_kast_name">Ε. Συμεωνίδου – Καστανίδου</string>
+		<string name="contact_kast_office">Νομική Σχολή ΑΠΘ, γρ. 205</string>
+		<string name="contact_kast_post">54124 Θεσσαλονίκη, Ελλάδα</string>
+		<string name="contact_kast_tel">Τηλ: 2310996496 / 2310344308</string>
+		<string name="contact_kast_fax">Φαξ: 2310996494</string>
+		<string name="contact_kast_email">kastan@law.auth.gr</string>
+		<string name="contact_tarl_name">B. Ταρλατζής</string>
+		<string name="contact_tarl_office">Σχολή Επιστημών Υγείας AΠΘ</string>
+		<string name="contact_tarl_post">54124 Θεσσαλονίκη, Ελλάδα</string>
+		<string name="contact_tarl_tel">Τηλ: 2310991182</string>
+		<string name="contact_tarl_email">tarlatzis@gmail.com</string>
+	<!-- Contact Us -->
+	
+</resources>
