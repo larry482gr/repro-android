@@ -19,9 +19,18 @@ project.properties
 #Mac_OS files
 .DS_Store
 
+# Windows thumbnail db
+Thumbs.db
+
 # Other files
-*.project
-*.classpath
+.project
+.classpath
 
 #Android web image
 ic_launcher-web.png
+
+# Android Studio
+.idea
+.gradle
+build/
+import-summary.txt
