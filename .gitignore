@@ -14,9 +14,10 @@ gen/
 
 # Local configuration file (sdk path, etc)
 local.properties
+project.properties
 
 #Mac_OS files
-*.DS_Store
+.DS_Store
 
 # Other files
 *.project
