@@ -60,13 +60,13 @@ public class DatabaseConstants {
 			_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + REMOTE_ID + " INTEGER," + GROUP_ID + " INTEGER," + 
 			NAME + " TEXT," + EMAIL + " TEXT," + PICTURE + " TEXT," + CV + " TEXT," + PUBS + " TEXT" + "); ";
 	
-	/** The Constant CREATE_MEMBERS_GROUPS_TABLE. */
+	/** The Constant CREATE_LINKS_CATEGORIES_TABLE. */
 	public final static String CREATE_LINKS_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_LINKS_CATEGORIES + "(" +
 			_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + REMOTE_ID + " INTEGER," + 
 			LABEL + " TEXT," + LANG_ID + " TEXT," + POSITION + " TEXT," + IS_ACTIVE + " TEXT" + "); " + 
 			"CREATE INDEX position_index ON " + TABLE_LINKS_CATEGORIES + "(" + POSITION + ");";
 	
-	/** The Constant CREATE_MEMBERS_TABLE. */
+	/** The Constant CREATE_LINKS_TABLE. */
 	public final static String CREATE_LINKS_TABLE = "CREATE TABLE " + TABLE_LINKS + "(" +
 			_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + REMOTE_ID + " INTEGER," + CATEGORY_ID + " INTEGER," + 
 			HEADER + " TEXT," + PREPEND_TEXT + " TEXT," + LINK_LABEL + " TEXT," + LINK_URL + " TEXT," + APPEND_TEXT + " TEXT," + IS_GROUP + " INTEGER" + "); ";

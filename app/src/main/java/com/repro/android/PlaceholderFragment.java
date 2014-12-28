@@ -108,7 +108,7 @@ public class PlaceholderFragment extends Fragment {
 				fragmentId = R.layout.fragment_news_list;
 				break;
 			case 5:
-				fragmentId = R.layout.fragment_links;
+				fragmentId = R.layout.fragment_link_categories;
 				break;
 			case 8:
 				fragmentId = R.layout.fragment_contact;

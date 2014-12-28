@@ -46,6 +46,8 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
 	private String TAG = MainActivity.class.getCanonicalName();
 
+    private static boolean isSyncing = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -103,12 +105,13 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 					for(int i = 1; i < 6; i++) {
 						mHandler.postDelayed(new Runnable() {
 							public void run() {
-								if(NetworkUtilities.isConnectedToInternet(mContext)) {
-									enablingConnection.dismiss();
-									preloadContent();
-								}
-						    }
-						}, i*2000);
+                                if(NetworkUtilities.isConnectedToInternet(mContext) && !isSyncing) {
+                                    isSyncing = true;
+                                    enablingConnection.dismiss();
+                                    preloadContent();
+                                }
+                            }
+                        }, i*2000);
 					}
 					
 					mHandler.postDelayed(new Runnable() {
@@ -119,6 +122,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 													mContext.getResources().getString(R.string.check_network);
 								Toast.makeText(mContext, toastMessage, Toast.LENGTH_LONG).show();
 							}
+                            isSyncing = false;
 					    }
 					}, 11000);
 					

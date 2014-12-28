@@ -14,14 +14,13 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.repro.android.R;
 import com.repro.android.database.DatabaseConstants;
 import com.repro.android.entities.ArticlesModel;
 import com.repro.android.utilities.HtmlTagHandler;
 import com.repro.android.utilities.ImageUtilities;
 
 public class ArticleFragment extends Fragment {
-	private final String TAG = "ArticleFragment";
+	private final String TAG = ArticleFragment.class.getCanonicalName();
 	private static final String ARTICLE_ID = "article_id";
 	private ArticlesModel articlesModel;
 	private DisplayImageOptions options;
