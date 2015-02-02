@@ -25,9 +25,13 @@ doc/
 
 # Local configuration file (sdk path, etc)
 local.properties
+project.properties
 
 #Mac_OS files
-*.DS_Store
+.DS_Store
+
+# Windows thumbnail db
+Thumbs.db
 
 # Other files
 *.project
@@ -36,3 +40,9 @@ local.properties
 
 #Android web image
 ic_launcher-web.png
+
+# Android Studio
+.idea
+.gradle
+build/
+import-summary.txt

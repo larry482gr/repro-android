@@ -56,14 +56,19 @@ public class LinkCategoriesAdapter extends CursorAdapter {
 				Cursor category = linksModel.findLinkCategory(categoryId);
 				Cursor links = linksModel.findAllLinks(category);
 				if(category.moveToFirst()) {
-					Log.d(TAG, "==========" + category.get + ""==========");
+					Log.d(TAG, "==========" + category.getString(category.getColumnIndex(DatabaseConstants.LABEL)) + "==========");
 				}
 				
 				if(links.moveToFirst()) {
+					int i = 1;
 					do {
-						Log.d(TAG, "==========" + category.get + ""==========");
+						Log.d(TAG, i + ". " + links.getString(links.getColumnIndex(DatabaseConstants.LINK_LABEL)) + 
+								" --> " + links.getString(links.getColumnIndex(DatabaseConstants.LINK_URL)));
+						i++;
 					} while(links.moveToNext());
 				}
+				
+				Log.d(TAG, "=================================");
 				/*
 				FragmentManager fragmentManager = mContext.getFragmentManager();
 				fragmentManager
