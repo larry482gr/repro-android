@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Assisted Human Reproduction</string>
+    <string name="app_title">Assisted Human Reproduction</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_language">Language</string>
+    <string name="action_settings">Settings</string>
+    
+    <!-- Language Strings -->
+    	<string name="lang_select">Select Language</string>
+	    <string name="lang_english">English</string>
+	    <string name="lang_greek">Greek</string>
+	<!-- Language Strings -->
+	
+	<!-- Form Strings -->
+		<string name="all_required">All fields are required.</string>
+	<!-- Form Strings -->
+    
+    <!-- Menu Strings -->
+	    <string name="research_team">Research Team</string>
+	    <string name="research_program">Research Program</string>
+	    <string name="news">News</string>
+	    <string name="events">Events</string>
+	    <string name="links">Links</string>
+	    <string name="information">Information</string>
+	    <string name="opinion">Your Opinion</string>
+	    <string name="contact">Contact Us</string>
+	<!-- Menu Strings -->
+	
+	<!-- Button Strings -->
+		<string name="send_button">Send</string>
+	<!-- Button Strings -->
+	
+	<!-- Dialogs Strings -->
+		<string name="no_connection_msg">Αn active internet connection in needed to receive the latest content.</string>
+	    <string name="news_no_connection_msg">Please enable Wi-Fi or mobile data in order to receive the latest news.</string>
+	    <string name="enable_wifi">Enable Wi-Fi</string>
+	    <string name="enable_mobile">Enable Mobile Data</string>
+	    <string name="enabling_wifi">Enabling Wi-Fi...</string>
+	    <string name="enabling_mobile">Enabling Mobile Data...</string>
+	    <string name="connection_failure">Connection failure.</string>
+	    <string name="check_network">Please check your network and try again.</string>
+		<string name="accept">Ok</string>
+	    <string name="cancel">Cancel</string>
+	<!-- Dialogs Strings -->
+	
+	<!-- URL Script Strings -->
+		<string name="domain_url">http://repro.law.auth.gr/api/</string>
+		<string name="members_script">members.php?</string>
+		<string name="news_script">news.php?</string>
+		<string name="links_script">links.php?</string>
+		<string name="contact_script">contact.php?</string>
+	<!-- URL Script Strings -->
+		
+	<!-- URL Params Strings -->
+		<string name="param_separator">&amp;</string>
+		<string name="param_operator">=</string>
+		<string name="param_action">action</string>
+		<string name="param_id">id</string>
+	<!-- URL Params Strings -->
+
+	<!-- URL Action Strings -->
+		<string name="find_all">all</string>
+		<string name="find_one">one</string>
+	<!-- URL Action Strings -->
+	
+	<!-- URL Image Strings -->
+		<string name="news_images">http://repro.law.auth.gr/resources/images/news/</string>
+		<string name="members_images">http://repro.law.auth.gr/resources/images/members/</string>
+	<!-- URL Image Strings -->
+	
+	<!-- Research Members -->
+		<string name="member_contact">Contact</string>
+	<!-- Research Members -->
+	
+	<!-- Links -->
+		<string name="link_categories_header">Link Categories</string>
+	<!-- Links -->
+	
+	<!-- Contact Us -->
+		<string name="contact_form">Contact Form</string>
+		<string name="contact_full_name">Full Name:</string>
+		<string name="contact_email">Email:</string>
+		<string name="contact_subject">Subject:</string>
+		<string name="contact_message">Message:</string>
+		<string name="email_no_connection_msg">You need an active connection to send email.</string>
+		<string name="contact_kast_name">Ε. Symeonidou - Kastanidou</string>
+		<string name="contact_kast_office">Faculty of Law,\nAUTH University Campus</string>
+		<string name="contact_kast_post">54124 Thessaloniki, Greece</string>
+		<string name="contact_kast_tel">Tel: 0030 2310996496</string>
+		<string name="contact_kast_fax">Fax: 0030 2310996494</string>
+		<string name="contact_kast_email">kastan@law.auth.gr</string>
+		<string name="contact_tarl_name">B. Τarlatzis</string>
+		<string name="contact_tarl_office">Faculty of Health Sciences,\nSchool of Medicine,\nAUTH University Campus</string>
+		<string name="contact_tarl_post">54124 Thessaloniki, Greece</string>
+		<string name="contact_tarl_tel">Tel: 0030 2310991182</string>
+		<string name="contact_tarl_email">tarlatzis@gmail.com</string>
+	<!-- Contact Us -->
+	
+</resources>

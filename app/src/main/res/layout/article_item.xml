@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/article_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="6dp">
+    
+    <ImageView 
+        android:id="@+id/article_image"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="4dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_launcher" />
+    
+    <HorizontalScrollView
+        android:id="@+id/article_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/article_image"
+	    android:layout_toEndOf="@+id/article_image"
+	    android:layout_alignParentTop="true"
+	    android:layout_marginLeft="8dp"
+	    android:layout_marginStart="8dp"
+	    android:scrollbars="none">
+        
+        <TextView
+            android:id="@+id/article_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="Sample Title"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        
+    </HorizontalScrollView>
+    
+    <TextView
+        android:id="@+id/article_short_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/article_image"
+        android:layout_toEndOf="@+id/article_image"
+        android:layout_below="@+id/article_title_view"
+        android:layout_alignLeft="@+id/article_title_view"
+        android:layout_alignStart="@+id/article_title_view"
+        android:lines="3"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        android:textColor="#444" />
+
+</RelativeLayout>
